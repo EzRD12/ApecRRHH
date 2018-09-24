@@ -1,12 +1,13 @@
 ﻿using Core.Enums;
 using System;
+using Core.Contracts;
 
 namespace Core.Models
 {
     /// <summary>
     /// Represents a competence of an user
     /// </summary>
-    public sealed class Competence
+    public sealed class Competence : IEntityBase
     {
         /// <summary>
         /// Represents the competence's identification

@@ -32,6 +32,17 @@ namespace Boundaries.Persistence.Context
         {
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new JobConfiguration());
+            modelBuilder.ApplyConfiguration(new JobCompetenceConfiguration());
+            modelBuilder.ApplyConfiguration(new JobLanguageConfiguration());
+            modelBuilder.ApplyConfiguration(new PreparationConfiguration());
+            modelBuilder.ApplyConfiguration(new CandidateEmployeeConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartamentConfiguration());
+            modelBuilder.ApplyConfiguration(new CompetenceConfiguration());
+            modelBuilder.ApplyConfiguration(new LanguageConfiguration());
+            modelBuilder.ApplyConfiguration(new UserCompetenceConfiguration());
+            modelBuilder.ApplyConfiguration(new UserLanguageConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkExperienceConfiguration());
         }
     }
 }

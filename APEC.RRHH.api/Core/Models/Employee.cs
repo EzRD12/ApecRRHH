@@ -1,9 +1,10 @@
 ﻿using System;
+using Core.Contracts;
 using Core.Enums;
 
 namespace Core.Models
 {
-    public sealed class Employee
+    public sealed class Employee : IEntityBase
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

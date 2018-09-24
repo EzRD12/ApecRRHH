@@ -1,6 +1,6 @@
 ﻿using Core.Contracts;
 using Core.Models;
-using Core.Ports;
+using Core.Ports.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;

@@ -6,7 +6,11 @@ namespace Boundaries.Persistence.Configurations
 {
     internal sealed class JobCompetenceConfiguration : IEntityTypeConfiguration<JobCompetence>
     {
-        void IEntityTypeConfiguration<JobCompetence>.Configure(EntityTypeBuilder<JobCompetence> builder) 
-            => builder.HasKey(p => new { p.JobId, p.CompetenceId });
+        void IEntityTypeConfiguration<JobCompetence>.Configure(EntityTypeBuilder<JobCompetence> builder)
+        {
+            builder.HasKey(p => new { p.JobId, p.CompetenceId });
+            builder.Property(p => p.JobId).IsRequired();
+            builder.Property(p => p.CompetenceId).IsRequired();
+        }
     }
 }

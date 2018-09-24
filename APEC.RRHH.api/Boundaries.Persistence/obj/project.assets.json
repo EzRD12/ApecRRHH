@@ -3720,11 +3720,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Boundaries.Persistence\\Boundaries.Persistence.csproj",
+      "projectUniqueName": "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Boundaries.Persistence\\Boundaries.Persistence.csproj",
       "projectName": "Boundaries.Persistence",
-      "projectPath": "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Boundaries.Persistence\\Boundaries.Persistence.csproj",
+      "projectPath": "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Boundaries.Persistence\\Boundaries.Persistence.csproj",
       "packagesPath": "C:\\Users\\Ezequiel Rodriguez\\.nuget\\packages\\",
-      "outputPath": "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Boundaries.Persistence\\obj\\",
+      "outputPath": "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Boundaries.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3743,8 +3743,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Core\\Core.csproj": {
-              "projectPath": "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Core\\Core.csproj"
+            "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Core\\Core.csproj": {
+              "projectPath": "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Core\\Core.csproj"
             }
           }
         }

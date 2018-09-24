@@ -687,11 +687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Core\\Core.csproj",
+      "projectUniqueName": "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Core\\Core.csproj",
+      "projectPath": "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\Ezequiel Rodriguez\\.nuget\\packages\\",
-      "outputPath": "F:\\PROJECTS\\APEC.RRHH\\APEC.RRHH.api\\Core\\obj\\",
+      "outputPath": "F:\\PROJECTS\\ApecRRHH\\APEC.RRHH.api\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

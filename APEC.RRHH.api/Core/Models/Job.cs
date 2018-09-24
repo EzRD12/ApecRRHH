@@ -1,10 +1,11 @@
 ﻿using Core.Enums;
 using System;
 using System.Collections.Generic;
+using Core.Contracts;
 
 namespace Core.Models
 {
-    public sealed class Job
+    public sealed class Job : IEntityBase
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

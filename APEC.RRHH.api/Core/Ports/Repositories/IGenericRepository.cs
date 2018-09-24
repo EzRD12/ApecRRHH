@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Core.Ports
+namespace Core.Ports.Repositories
 {
     /// <summary>
     /// Represents the basic operations that can be performed over a repository

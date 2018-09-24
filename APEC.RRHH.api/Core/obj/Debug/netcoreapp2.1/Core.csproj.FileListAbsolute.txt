@@ -1,0 +1,9 @@
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\bin\Debug\netcoreapp2.1\Core.deps.json
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\bin\Debug\netcoreapp2.1\Core.dll
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\bin\Debug\netcoreapp2.1\Core.pdb
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\obj\Debug\netcoreapp2.1\Core.csprojAssemblyReference.cache
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\obj\Debug\netcoreapp2.1\Core.csproj.CoreCompileInputs.cache
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\obj\Debug\netcoreapp2.1\Core.AssemblyInfoInputs.cache
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\obj\Debug\netcoreapp2.1\Core.AssemblyInfo.cs
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\obj\Debug\netcoreapp2.1\Core.dll
+F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Core\obj\Debug\netcoreapp2.1\Core.pdb

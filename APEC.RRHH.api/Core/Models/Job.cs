@@ -12,6 +12,8 @@ namespace Core.Models
         public RiskLevel RiskLevel { get; set; }
         public int MinimumSalary { get; set; }
         public int MaximumSalary { get; set; }
+        public int QuantityOfEmployeesNeeded { get; set; }
+        public FeatureStatus Status { get; set; }
         public CurrencyType CurrencyType { get; set; }
         public Departament Departament { get; set; }
         public Guid DepartamentId { get; set; }

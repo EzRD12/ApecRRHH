@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Usecases\" />
+    <Compile Remove="Usecases\**" />
+    <EmbeddedResource Remove="Usecases\**" />
+    <None Remove="Usecases\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.0.100" />
   </ItemGroup>
 
 </Project>

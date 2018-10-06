@@ -9,6 +9,7 @@ namespace Core.Models
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
+        public FeatureStatus Status { get; set; }
         public DateTime AdmissionDate { get; set; }
         public Guid JobId { get; set; }
         public Job Job { get; set; }

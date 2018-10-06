@@ -1,7 +1,7 @@
 ﻿using Boundaries.Persistence.Configurations;
+using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Core.Models;
 
 namespace Boundaries.Persistence.Context
 {
@@ -12,6 +12,30 @@ namespace Boundaries.Persistence.Context
         internal DbSet<Employee> Employees { get; set; }
 
         internal DbSet<User> Users { get; set; }
+
+        internal DbSet<Competence> Competences { get; set; }
+
+        internal DbSet<Departament> Departaments { get; set; }
+
+        internal DbSet<Job> Jobs { get; set; }
+
+        internal DbSet<JobCompetence> JobCompetences { get; set; }
+
+        internal DbSet<JobLanguage> JobLanguages { get; set; }
+
+        internal DbSet<UserCompetence> UserCompetences { get; set; }
+
+        internal DbSet<UserLanguage> UserLanguages { get; set; }
+
+        internal DbSet<Language> Languages { get; set; }
+
+        internal DbSet<Preparation> Preparations { get; set; }
+
+        internal DbSet<WorkExperience> WorkExperiences { get; set; }
+
+        internal DbSet<CandidateEmployee> CandidateEmployees { get; set; }
+
+        internal DbSet<CandidateEmployeeAspiratedJob> CandidateEmployeeAspiratedJobs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
@@ -43,6 +67,7 @@ namespace Boundaries.Persistence.Context
             modelBuilder.ApplyConfiguration(new UserCompetenceConfiguration());
             modelBuilder.ApplyConfiguration(new UserLanguageConfiguration());
             modelBuilder.ApplyConfiguration(new WorkExperienceConfiguration());
+            modelBuilder.ApplyConfiguration(new CandidateEmployeeAspiratedJobsConfiguration());
         }
     }
 }

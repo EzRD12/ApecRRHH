@@ -16,7 +16,6 @@ namespace Core.Models
         public DateTime Birthdate { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public FeatureStatus Status { get; set; }
         public ISet<UserCompetence> UserCompetences { get; set; }
         public ISet<UserLanguage> UserLanguages { get; set; }
         public ISet<Preparation> Preparations { get; set; }

@@ -10,12 +10,6 @@ namespace Boundaries.Persistence.Configurations
         {
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Id).HasDefaultValueSql("newsequentialid()");
-            builder.Property(p => p.JobToAspire)
-                .IsRequired();
-            builder.Property(p => p.SalaryToAspire)
-                .IsRequired();
-            builder.Property(job => job.UserId).IsRequired();
-            builder.Property(job => job.UserIdWhoRecommendedIt).IsRequired(false);
         }
     }
 }

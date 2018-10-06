@@ -1,7 +1,7 @@
-﻿using Core.Enums;
+﻿using Core.Contracts;
+using Core.Enums;
 using System;
 using System.Collections.Generic;
-using Core.Contracts;
 
 namespace Core.Models
 {

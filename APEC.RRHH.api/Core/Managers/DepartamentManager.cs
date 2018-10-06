@@ -12,13 +12,11 @@ namespace Core.Managers
     {
         private readonly IDepartamentRepository _departamentRepository;
         private readonly IJobRepository _jobRepository;
-        private readonly IEmployeeRepository _employeeRepository;
 
-        public DepartamentManager(IDepartamentRepository departamentRepository, IJobRepository jobRepository, IEmployeeRepository employeeRepository)
+        public DepartamentManager(IDepartamentRepository departamentRepository, IJobRepository jobRepository)
         {
             _departamentRepository = departamentRepository;
             _jobRepository = jobRepository;
-            _employeeRepository = employeeRepository;
         }
 
         public IOperationResult<Departament> Create(Departament departament)
@@ -61,6 +59,15 @@ namespace Core.Managers
             DisableDepartementResponse response = new DisableDepartementResponse(jobs, employees);
 
             return BasicOperationResult<DisableDepartementResponse>.Ok(response);
+        }
+
+        public IOperationResult<Departament> Find(Guid departamentId)
+        {
+            Departament departamentFound = _departamentRepository.Find(departament => departament.Id == departamentId, departament => departament.Jobs);
+
+            return departamentFound == null 
+                ? BasicOperationResult<Departament>.Fail("DepartamentDoesNotExistOnRepository") 
+                : BasicOperationResult<Departament>.Ok(departamentFound);
         }
 
         public IOperationResult<Departament> EnableDepartament(Guid departamentId)

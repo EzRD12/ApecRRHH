@@ -14,10 +14,8 @@ namespace Core.Managers
     {
         private readonly IUserRepository _userRepository;
 
-        public UserManager(IUserRepository userRepository)
-        {
-            _userRepository = userRepository;
-        }
+        public UserManager(IUserRepository userRepository) 
+            => _userRepository = userRepository;
 
         public IOperationResult<User> Create(User user)
         {
@@ -47,31 +45,17 @@ namespace Core.Managers
 
         public IOperationResult<User> Find(Guid userId)
         {
-            User userFound = _userRepository.Find(user => user.Id == userId);
+            User userFound = _userRepository.Find(user => user.Id == userId, user => user.Preparations, user => user.UserCompetences, user => user.UserLanguages, user => user.WorkExperiences);
             return userFound == null ? BasicOperationResult<User>.Fail("UserNotFound") : BasicOperationResult<User>.Ok(userFound);
         }
 
         public IOperationResult<User> Update(User user)
         {
-            return _userRepository.Update(user);
-        }
+            bool userExists = _userRepository.Exists(us => us.Id == user.Id);
 
-        public IOperationResult<bool> ChangeUserState(Guid userId, FeatureStatus status)
-        {
-            User userFound = _userRepository.Find(user => user.Id == userId);
-
-            if (userFound == null)
-            {
-                return BasicOperationResult<bool>.Fail("UserNotFound");
-            }
-
-            userFound.Status = status;
-
-            IOperationResult<User> operationResult = _userRepository.Update(userFound);
-
-            return operationResult.Success
-                ? BasicOperationResult<bool>.Ok()
-                : BasicOperationResult<bool>.Fail("OperationFailed");
+            return !userExists 
+                ? BasicOperationResult<User>.Fail("UserDoesNotExistsOnRepository") 
+                : _userRepository.Update(user);
         }
 
         public IOperationResult<bool> ChangeUserRole(Guid userId, Role role)

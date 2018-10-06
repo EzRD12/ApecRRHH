@@ -29,8 +29,6 @@ namespace Boundaries.Persistence.Configurations
                 .IsRequired();
             builder.Property(p => p.Identification)
                 .IsRequired();
-            builder.Property(p => p.Status)
-                .IsRequired();
             builder.HasMany(user => user.UserCompetences);
             builder.HasMany(user => user.UserLanguages);
 

@@ -18,6 +18,8 @@ namespace Boundaries.Persistence.Configurations
             builder.Property(work => work.Salary).IsRequired();
             builder.Property(work => work.UserId).IsRequired();
             builder.Property(work => work.CurrencyType).IsRequired();
+
+            builder.Ignore(user => user.YearExperiences);
         }
     }
 }

@@ -73,6 +73,15 @@ namespace Core.Managers
             return BasicOperationResult<IEnumerable<Employee>>.Ok(employees);
         }
 
+        public IOperationResult<Job> Find(Guid jobId)
+        {
+            Job entity = _jobRepository.Find(job => job.Id == jobId, departament => departament.Employees, job => job.JobCompetences, job => job.JobLanguages);
+
+            return entity == null
+                ? BasicOperationResult<Job>.Fail("DepartamentDoesNotExistOnRepository")
+                : BasicOperationResult<Job>.Ok(entity);
+        }
+
         public IOperationResult<Job> EnableJob(Guid jobId)
         {
             Job jobFound = _jobRepository.Find(job => job.Id == jobId);

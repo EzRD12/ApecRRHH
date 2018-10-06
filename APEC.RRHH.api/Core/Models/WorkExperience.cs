@@ -12,6 +12,7 @@ namespace Core.Models
         public string PositionHeld { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateUp { get; set; }
+        public int YearExperiences => DateTime.Compare(DateFrom, DateUp);
         public int Salary { get; set; }
         public CurrencyType CurrencyType { get; set; }
     }

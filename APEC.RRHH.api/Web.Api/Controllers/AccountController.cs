@@ -3,7 +3,6 @@ using Core.Managers;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using Web.Api.Filters;
 
 namespace Web.Api.Controllers
@@ -13,17 +12,15 @@ namespace Web.Api.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager _userManager;
-
-        public AccountController(UserManager userManager) 
-            => _userManager = userManager;
+        private readonly CandidateEmployeeManager _candidateEmployeeManager;
 
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public AccountController(UserManager userManager, CandidateEmployeeManager candidateEmployeeManager)
         {
-            return "value";
+            _userManager = userManager;
+            _candidateEmployeeManager = candidateEmployeeManager;
         }
+
 
         /// <summary>
         /// Authenticates an user 
@@ -45,16 +42,81 @@ namespace Web.Api.Controllers
                 : BadRequest(operationResult.Message);
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        /// <summary>
+        /// Authenticates an user 
+        /// </summary>
+        /// <param name="userId">An instance of <see cref="Guid"/></param>
+        /// <returns>Retrieves an identification for the user</returns>
+        [HttpGet]
+        [ModelStateFilter]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult GetUser([FromBody] Guid userId)
         {
+            IOperationResult<User> operationResult = _userManager.Find(userId);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.Entity)
+                : BadRequest(operationResult.Message);
         }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        /// <summary>
+        /// Creates an user 
+        /// </summary>
+        /// <param name="user">An instance of <see cref="User"/></param>
+        /// <returns>Retrieves an identification for the user</returns>
+        [HttpPost]
+        [ModelStateFilter]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult CreateUser([FromBody] User user)
         {
+            IOperationResult<User> operationResult = _userManager.Create(user);
+
+            if (!operationResult.Success)
+            {
+                return BadRequest(operationResult.Message);
+            }
+
+            CandidateEmployee candidateEmployee = new CandidateEmployee
+            {
+                User = operationResult.Entity
+            };
+
+            IOperationResult<CandidateEmployee> candidateEmployeeOperationResult = _candidateEmployeeManager.Create(candidateEmployee);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(candidateEmployeeOperationResult.Entity)
+                : BadRequest(candidateEmployeeOperationResult.Message);
+        }
+
+        /// <summary>
+        /// Creates an user 
+        /// </summary>
+        /// <param name="user">An instance of <see cref="User"/></param>
+        /// <returns>Retrieves an identification for the user</returns>
+        [HttpPut]
+        [ModelStateFilter]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateUser([FromBody] User user)
+        {
+            IOperationResult<User> operationResult = _userManager.Update(user);
+
+            if (!operationResult.Success)
+            {
+                return BadRequest(operationResult.Message);
+            }
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.Entity)
+                : BadRequest(operationResult.Message);
         }
     }
 }

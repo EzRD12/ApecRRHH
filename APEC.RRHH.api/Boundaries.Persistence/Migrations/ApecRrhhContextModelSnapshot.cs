@@ -97,6 +97,8 @@ namespace Boundaries.Persistence.Migrations
 
                     b.Property<int>("MonthlySalary");
 
+                    b.Property<int>("Status");
+
                     b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
@@ -128,7 +130,11 @@ namespace Boundaries.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(400)");
 
+                    b.Property<int>("QuantityOfEmployeesNeeded");
+
                     b.Property<int>("RiskLevel");
+
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 
@@ -245,8 +251,6 @@ namespace Boundaries.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(400)")
                         .HasMaxLength(900);
-
-                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 

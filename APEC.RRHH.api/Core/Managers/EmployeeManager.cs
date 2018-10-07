@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Contracts;
 using Core.Models;
 using Core.Ports.Repositories;
@@ -21,6 +22,13 @@ namespace Core.Managers
             return entity == null
                 ? BasicOperationResult<Employee>.Fail("EmployeeDoesNotExistOnRepository")
                 : BasicOperationResult<Employee>.Ok(entity);
+        }
+
+        public IOperationResult<IEnumerable<Employee>> GetAll()
+        {
+            IEnumerable<Employee> employees = _employeeRepository.Get();
+
+            return BasicOperationResult<IEnumerable<Employee>>.Ok(employees);
         }
 
         public IOperationResult<Employee> Update(Employee employee)

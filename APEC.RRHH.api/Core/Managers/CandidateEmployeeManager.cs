@@ -9,7 +9,7 @@ using Core.Validations;
 
 namespace Core.Managers
 {
-    public sealed class CandidateEmployeeManagers
+    public sealed class CandidateEmployeeManager
     {
         private readonly ICandidateEmployeeRepository _candidateEmployeeRepository;
         private readonly ICandidateInterviewRepository _candidateInterviewRepository;
@@ -17,7 +17,7 @@ namespace Core.Managers
         private readonly ICandidateEmployeeAspiratedJobRepository _candidateEmployeeAspiratedJobRepository;
 
 
-        public CandidateEmployeeManagers(ICandidateEmployeeRepository candidateEmployeeRepository, ICandidateEmployeeAspiratedJobRepository candidateEmployeeAspiratedJobRepository,
+        public CandidateEmployeeManager(ICandidateEmployeeRepository candidateEmployeeRepository, ICandidateEmployeeAspiratedJobRepository candidateEmployeeAspiratedJobRepository,
             IJobRepository jobRepository, ICandidateInterviewRepository candidateInterviewRepository)
         {
             _candidateEmployeeRepository = candidateEmployeeRepository;
@@ -46,6 +46,14 @@ namespace Core.Managers
             }
 
             return _candidateInterviewRepository.Create(candidateInterview);
+        }
+
+        public IOperationResult<IEnumerable<CandidateEmployee>> GetCandidateOnAcceptationProcess()
+        {
+            IEnumerable<CandidateEmployee> candidateEmployees = _candidateInterviewRepository.FindAll(employee => employee.InterviewDate.Date > DateTime.Today.Date)
+                .Select(employee => employee.CandidateEmployee);
+
+            return BasicOperationResult<IEnumerable<CandidateEmployee>>.Ok(candidateEmployees);
         }
 
         public IOperationResult<IEnumerable<CandidateInterview>> GetAllInterviews() 

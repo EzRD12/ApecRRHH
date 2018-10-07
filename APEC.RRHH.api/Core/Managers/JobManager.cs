@@ -50,6 +50,13 @@ namespace Core.Managers
             return _jobRepository.Update(job);
         }
 
+        public IOperationResult<IEnumerable<Job>> GetVacanciesAvailable()
+        {
+            IEnumerable<Job> jobs = _jobRepository.FindAll(job => job.QuantityOfEmployeesNeeded < job.Employees.Count, job => job.Employees);
+
+            return BasicOperationResult<IEnumerable<Job>>.Ok(jobs);
+        }
+
         public IOperationResult<IEnumerable<Employee>> DisableJob(Guid jobId)
         {
             IEnumerable<Employee> employees = null;

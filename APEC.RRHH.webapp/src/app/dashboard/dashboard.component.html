@@ -1,0 +1,234 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-warning text-center">
+                                <i class="ti-server"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Vacantes disponibles</p>
+                                105
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr />
+                        <div class="stats">
+                            <i class="ti-reload"></i> Updated now
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-success text-center">
+                                <i class="ti-wallet"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Empleados activos</p>
+                                505
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr />
+                        <div class="stats">
+                            <i class="ti-calendar"></i> Last day
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-danger text-center">
+                                <i class="ti-pulse"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Empleados candidatos</p>
+                                23
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr />
+                        <div class="stats">
+                            <i class="ti-timer"></i> In the last hour
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <div class="icon-big icon-info text-center">
+                                <i class="ti-twitter-alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="numbers">
+                                <p>Candidatos en proceso</p>
+                                15
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <hr />
+                        <div class="stats">
+                            <i class="ti-reload"></i> Updated now
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-8">
+            <nz-card>
+                <div class="header">
+                    <h4 class="title">Vacantes disponibles</h4>
+                </div>
+                <div class="content">
+                    <nz-table #basicTable [nzData]="dataSet">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of basicTable.data">
+                                <td>{{data.name}}</td>
+                                <td>{{data.age}}</td>
+                                <td>{{data.address}}</td>
+                                <td>
+                                    <a>Ver detalle</a>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                    <a>Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+
+        <div class="col-md-4">
+            <nz-card>
+                <div class="header">
+                    <h4 class="title">Puestos</h4>
+                </div>
+                <div class="content">
+                    <nz-table #basicTable [nzData]="dataSet">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of basicTable.data">
+                                <td>{{data.name}}</td>
+                                <td>{{data.age}}</td>
+                                <td>{{data.address}}</td>
+                                <td>
+                                    <a>Ver detalle</a>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                    <a>Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <nz-card>
+                <div class="header">
+                    <h4 class="title">Empleados candidatos</h4>
+                </div>
+                <div class="content">
+                    <nz-table #basicTable [nzData]="dataSet">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of basicTable.data">
+                                <td>{{data.name}}</td>
+                                <td>{{data.age}}</td>
+                                <td>{{data.address}}</td>
+                                <td>
+                                    <a>Ver detalle</a>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                    <a>Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+        <div class="col-md-6">
+            <nz-card>
+                <div class="header">
+                    <h4 class="title">Entrevistas pendientes</h4>
+                </div>
+                <div class="content">
+                    <nz-table #basicTable [nzData]="dataSet">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of basicTable.data">
+                                <td>{{data.name}}</td>
+                                <td>{{data.age}}</td>
+                                <td>{{data.address}}</td>
+                                <td>
+                                    <a>Ver detalle</a>
+                                    <nz-divider nzType="vertical"></nz-divider>
+                                    <a>Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+</div>

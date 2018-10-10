@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Contracts;
+using Core.Enums;
 using Core.Models;
 using Core.Ports.Repositories;
 using FluentValidationsResult = FluentValidation.Results.ValidationResult;
@@ -63,7 +64,7 @@ namespace Core.Managers
             => BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(_candidateInterviewRepository.FindAll(interview => !interview.Hired 
                                                                                                                            && interview.InterviewDate.Date > DateTime.Now.Date));
 
-        public IOperationResult<CandidateInterview> Find(Guid candidateEmployeeId, Guid jobId)
+        public IOperationResult<CandidateInterview> FindInterviewProfile(Guid candidateEmployeeId, Guid jobId)
         {
             CandidateInterview candidateInterview = _candidateInterviewRepository.Find(candidate => candidate.CandidateEmployeeId == candidateEmployeeId
                                                                                                    && candidate.JobId == jobId);
@@ -85,6 +86,12 @@ namespace Core.Managers
         {
             CandidateEmployee candidateEmployee = _candidateEmployeeRepository.Find(candidate => candidate.Id == id);
             return BasicOperationResult<CandidateEmployee>.Ok(candidateEmployee);
+        }
+
+        public IOperationResult<IEnumerable<CandidateEmployee>> GetAllActives()
+        {
+            IEnumerable<CandidateEmployee> candidateEmployees = _candidateEmployeeRepository.FindAll(candidate => candidate.Status == FeatureStatus.Enabled);
+            return BasicOperationResult<IEnumerable<CandidateEmployee>>.Ok(candidateEmployees);
         }
 
         public IOperationResult<CandidateEmployeeAspiratedJob> AspirateToJob(CandidateEmployeeAspiratedJob candidateEmployeeAspiratedJob)

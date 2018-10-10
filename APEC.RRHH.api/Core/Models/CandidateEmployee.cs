@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Enums;
 
 namespace Core.Models
 {
@@ -8,6 +9,7 @@ namespace Core.Models
         public Guid Id { get; set; }
         public User User { get; set; }
         public Guid UserId { get; set; }
+        public FeatureStatus Status { get; set; }
         public ISet<CandidateInterview> Interviews { get; set; }
     }
 }

@@ -28,6 +28,7 @@ namespace Web.Api.Controllers
         /// <param name="authenticateUserRequest">An instance of <see cref="AuthenticateUserRequest"/></param>
         /// <returns>Retrieves an identification for the user</returns>
         [HttpPost]
+        [HttpPatch("authenticate")]
         [ModelStateFilter]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
@@ -38,7 +39,7 @@ namespace Web.Api.Controllers
             IOperationResult<User> operationResult = _userManager.Authenticate(authenticateUserRequest);
 
             return operationResult.Success
-                ? (IActionResult) Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.Entity)
                 : BadRequest(operationResult.Message);
         }
 
@@ -49,11 +50,12 @@ namespace Web.Api.Controllers
         /// <returns>Retrieves an identification for the user</returns>
         [HttpGet]
         [ModelStateFilter]
+        [HttpPatch("{userId}")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult GetUser([FromBody] Guid userId)
+        public IActionResult GetUser(Guid userId)
         {
             IOperationResult<User> operationResult = _userManager.Find(userId);
 
@@ -69,6 +71,7 @@ namespace Web.Api.Controllers
         /// <returns>Retrieves an identification for the user</returns>
         [HttpPost]
         [ModelStateFilter]
+        [HttpPatch("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -101,6 +104,7 @@ namespace Web.Api.Controllers
         /// <returns>Retrieves an identification for the user</returns>
         [HttpPut]
         [ModelStateFilter]
+        [HttpPatch("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

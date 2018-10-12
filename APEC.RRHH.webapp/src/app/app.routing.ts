@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { IconsComponent } from './icons/icons.component';
-import { TableComponent } from './table/table.component';
-import { UserComponent } from './user/user.component';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { TableComponent } from './table/table.component';
+import { UserComponent } from './user/user.component';
 
 
 export const AppRoutes: Routes = [
@@ -19,13 +18,8 @@ export const AppRoutes: Routes = [
         component: AdminComponent,
         children: [
             {
-                path: '',
-                redirectTo: 'home',
-                pathMatch: 'full',
-            },
-            {
                 path: 'home',
-                component: DashboardComponent
+                loadChildren: './dashboard/dashboard.module#DashboardModule',
             },
             {
                 path: 'profile',
@@ -37,7 +31,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'administration',
-                component: DashboardComponent
+                loadChildren: './dashboard/dashboard.module#DashboardModule',
             },
             {
                 path: 'departament',
@@ -45,7 +39,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'employee',
-                component: DashboardComponent
+                loadChildren: './dashboard/dashboard.module#DashboardModule',
             }]
     }
     , {
@@ -55,5 +49,6 @@ export const AppRoutes: Routes = [
             path: 'pages',
             loadChildren: './pages/pages.module#PagesModule'
         }]
-    }
+    },
+    { path: '**', component: NotFoundPageComponent }
 ];

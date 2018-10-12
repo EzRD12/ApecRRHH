@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes = [
@@ -19,8 +18,7 @@ const routes = [
     {
         path: 'sign-up',
         component: SignUpComponent
-    },
-    { path: '**', component: NotFoundPageComponent }
+    }
 ];
 
 @NgModule({

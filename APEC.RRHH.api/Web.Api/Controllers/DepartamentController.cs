@@ -24,7 +24,7 @@ namespace Web.Api.Controllers
         /// <returns>A departament vacancies available</returns>
         [HttpPost]
         [ModelStateFilter]
-        [HttpPatch("")]
+        [Route("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -44,7 +44,7 @@ namespace Web.Api.Controllers
         /// <returns>A departament </returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("")]
+        [Route("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

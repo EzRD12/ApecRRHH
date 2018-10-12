@@ -25,7 +25,7 @@ namespace Web.Api.Controllers
         /// <returns>A job vacancies available</returns>
         [HttpPost]
         [ModelStateFilter]
-        [HttpPatch("")]
+        [Route("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -45,7 +45,7 @@ namespace Web.Api.Controllers
         /// <returns>A job vacancies available</returns>
         [HttpPut]
         [ModelStateFilter]
-        [HttpPatch("")]
+        [Route("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -65,7 +65,7 @@ namespace Web.Api.Controllers
         /// <returns>A job vacancies available</returns>
         [HttpDelete]
         [ModelStateFilter]
-        [HttpPatch("{jobId}")]
+        [Route("{jobId}")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -86,7 +86,7 @@ namespace Web.Api.Controllers
         /// <returns>A job's instance</returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("{jobId}")]
+        [Route("{jobId}")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

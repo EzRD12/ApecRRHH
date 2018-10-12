@@ -29,7 +29,7 @@ namespace Web.Api.Controllers
         /// <returns>A job vacancies available</returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("vacancies")]
+        [Route("vacancies")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -49,7 +49,7 @@ namespace Web.Api.Controllers
         /// <returns>All employees</returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("employees")]
+        [Route("employees")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -69,7 +69,7 @@ namespace Web.Api.Controllers
         /// <returns>All employees</returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("jobs")]
+        [Route("jobs")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -89,7 +89,7 @@ namespace Web.Api.Controllers
         /// <returns>All candidate employee actives</returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("candidates")]
+        [Route("candidates")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -109,7 +109,7 @@ namespace Web.Api.Controllers
         /// <returns>A job vacancies available</returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("candidate-on-process")]
+        [Route("candidate-on-process")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

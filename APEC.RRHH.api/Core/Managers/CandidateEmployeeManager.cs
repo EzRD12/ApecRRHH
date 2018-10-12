@@ -64,17 +64,15 @@ namespace Core.Managers
             => BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(_candidateInterviewRepository.FindAll(interview => !interview.Hired 
                                                                                                                            && interview.InterviewDate.Date > DateTime.Now.Date));
 
-        public IOperationResult<CandidateInterview> FindInterviewProfile(Guid candidateEmployeeId, Guid jobId)
+        public IOperationResult<CandidateInterview> FindInterviewProfile(Guid candidateInterviewId)
         {
-            CandidateInterview candidateInterview = _candidateInterviewRepository.Find(candidate => candidate.CandidateEmployeeId == candidateEmployeeId
-                                                                                                   && candidate.JobId == jobId);
+            CandidateInterview candidateInterview = _candidateInterviewRepository.Find(candidate => candidate.Id == candidateInterviewId);
             return BasicOperationResult<CandidateInterview>.Ok(candidateInterview);
         }
 
         public IOperationResult<CandidateInterview> UpdateCandidateInterview(CandidateInterview candidateInterview)
         {
-            bool interviewAlreadyExist = _candidateInterviewRepository.Exists(candidate => candidate.CandidateEmployeeId == candidateInterview.CandidateEmployeeId
-                                                                                                    && candidate.JobId == candidateInterview.JobId);
+            bool interviewAlreadyExist = _candidateInterviewRepository.Exists(candidate => candidate.Id == candidateInterview.Id);
             if (!interviewAlreadyExist)
             {
                 return BasicOperationResult<CandidateInterview>.Fail("InterviewDoesNotExistsOnRepository");

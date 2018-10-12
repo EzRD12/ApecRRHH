@@ -4,14 +4,16 @@ using Boundaries.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Boundaries.Persistence.Migrations
 {
     [DbContext(typeof(ApecRrhhContext))]
-    partial class ApecRrhhContextModelSnapshot : ModelSnapshot
+    [Migration("20181011185334_Some")]
+    partial class Some
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +44,6 @@ namespace Boundaries.Persistence.Migrations
 
                     b.Property<Guid>("JobId");
 
-                    b.Property<Guid>("Id");
-
                     b.Property<int>("SalaryToAspire");
 
                     b.Property<Guid?>("UserIdWhoRecommendedIt");
@@ -57,17 +57,9 @@ namespace Boundaries.Persistence.Migrations
 
             modelBuilder.Entity("Core.Models.CandidateInterview", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("newsequentialid()");
-
-                    b.Property<Guid?>("CandidateEmployeeAspiratedJobCandidateEmployeeId");
-
-                    b.Property<Guid>("CandidateEmployeeAspiratedJobId");
-
-                    b.Property<Guid?>("CandidateEmployeeAspiratedJobJobId");
-
                     b.Property<Guid>("CandidateEmployeeId");
+
+                    b.Property<Guid>("JobId");
 
                     b.Property<Guid?>("EmployeeId");
 
@@ -80,17 +72,11 @@ namespace Boundaries.Persistence.Migrations
 
                     b.Property<DateTime>("InterviewDate");
 
-                    b.Property<Guid>("JobId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CandidateEmployeeId");
+                    b.HasKey("CandidateEmployeeId", "JobId");
 
                     b.HasIndex("EmployeeId");
 
                     b.HasIndex("JobId");
-
-                    b.HasIndex("CandidateEmployeeAspiratedJobCandidateEmployeeId", "CandidateEmployeeAspiratedJobJobId");
 
                     b.ToTable("CandidateInterview");
                 });
@@ -370,7 +356,7 @@ namespace Boundaries.Persistence.Migrations
             modelBuilder.Entity("Core.Models.CandidateEmployeeAspiratedJob", b =>
                 {
                     b.HasOne("Core.Models.CandidateEmployee", "CandidateEmployee")
-                        .WithMany("CandidateEmployeeAspiratedJobs")
+                        .WithMany()
                         .HasForeignKey("CandidateEmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -388,17 +374,13 @@ namespace Boundaries.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Core.Models.Employee", "Employee")
-                        .WithMany("CandidateInterviews")
+                        .WithMany()
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("Core.Models.Job", "Job")
-                        .WithMany("Interviews")
+                        .WithMany()
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Core.Models.CandidateEmployeeAspiratedJob", "CandidateEmployeeAspiratedJob")
-                        .WithMany()
-                        .HasForeignKey("CandidateEmployeeAspiratedJobCandidateEmployeeId", "CandidateEmployeeAspiratedJobJobId");
                 });
 
             modelBuilder.Entity("Core.Models.Employee", b =>

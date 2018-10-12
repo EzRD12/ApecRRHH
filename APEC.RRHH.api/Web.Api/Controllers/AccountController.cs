@@ -28,7 +28,7 @@ namespace Web.Api.Controllers
         /// <param name="authenticateUserRequest">An instance of <see cref="AuthenticateUserRequest"/></param>
         /// <returns>Retrieves an identification for the user</returns>
         [HttpPost]
-        [HttpPatch("authenticate")]
+        [Route("authenticate")]
         [ModelStateFilter]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
@@ -50,7 +50,7 @@ namespace Web.Api.Controllers
         /// <returns>Retrieves an identification for the user</returns>
         [HttpGet]
         [ModelStateFilter]
-        [HttpPatch("{userId}")]
+        [Route("{userId}")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -71,7 +71,7 @@ namespace Web.Api.Controllers
         /// <returns>Retrieves an identification for the user</returns>
         [HttpPost]
         [ModelStateFilter]
-        [HttpPatch("")]
+        [Route("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
@@ -104,7 +104,7 @@ namespace Web.Api.Controllers
         /// <returns>Retrieves an identification for the user</returns>
         [HttpPut]
         [ModelStateFilter]
-        [HttpPatch("")]
+        [Route("")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

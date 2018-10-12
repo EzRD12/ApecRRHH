@@ -68,6 +68,7 @@ namespace Boundaries.Persistence.Context
             modelBuilder.ApplyConfiguration(new UserLanguageConfiguration());
             modelBuilder.ApplyConfiguration(new WorkExperienceConfiguration());
             modelBuilder.ApplyConfiguration(new CandidateEmployeeAspiratedJobsConfiguration());
+            modelBuilder.ApplyConfiguration(new CandidateInterviewConfiguration());
         }
     }
 }

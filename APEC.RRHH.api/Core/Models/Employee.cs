@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Contracts;
 using Core.Enums;
 
@@ -14,5 +15,6 @@ namespace Core.Models
         public Guid JobId { get; set; }
         public Job Job { get; set; }
         public int MonthlySalary { get; set; }
+        public ISet<CandidateInterview> CandidateInterviews { get; set; }
     }
 }

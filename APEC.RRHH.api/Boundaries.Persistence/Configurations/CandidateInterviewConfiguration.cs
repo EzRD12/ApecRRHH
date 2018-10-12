@@ -8,9 +8,12 @@ namespace Boundaries.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<CandidateInterview> builder)
         {
-            builder.HasKey(p => new { p.CandidateEmployeeId, p.JobId});
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Id).HasDefaultValueSql("newsequentialid()");
             builder.Property(p => p.InterviewDate).IsRequired();
-
+            builder.Property(p => p.CandidateEmployeeId).IsRequired();
+            builder.Property(p => p.JobId).IsRequired();
+            builder.Property(p => p.EmployeeIdWhoInterviewed).IsRequired();
         }
     }
 }

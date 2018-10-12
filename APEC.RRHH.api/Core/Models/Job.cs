@@ -20,6 +20,7 @@ namespace Core.Models
         public ISet<Employee> Employees { get; set; }
         public ISet<JobCompetence> JobCompetences { get; set; }
         public ISet<JobLanguage> JobLanguages { get; set; }
+        public ISet<CandidateInterview> Interviews { get; set; }
         public int MinimumYearsExperienceLaboral { get; set; }
     }
 }

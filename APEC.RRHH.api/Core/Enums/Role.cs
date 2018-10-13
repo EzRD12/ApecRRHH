@@ -5,6 +5,7 @@
         CandidateEmployee = 1,
         Employee,
         Supervisor,
-        Manager
+        Manager,
+        Administrator
     }
 }

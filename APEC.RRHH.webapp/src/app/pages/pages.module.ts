@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AccountService } from '../services/account.service';
 
 const routes = [
     {
@@ -27,7 +28,7 @@ const routes = [
         RouterModule.forChild(routes),
         ReactiveFormsModule
     ],
-    providers: [],
+    providers: [AccountService],
     declarations: [LoginComponent, SignUpComponent],
 })
 export class PagesModule {

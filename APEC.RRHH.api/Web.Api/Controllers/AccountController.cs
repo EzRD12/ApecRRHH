@@ -39,8 +39,8 @@ namespace Web.Api.Controllers
             IOperationResult<User> operationResult = _userManager.Authenticate(authenticateUserRequest);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
-                : BadRequest(operationResult.Message);
+                ? (IActionResult)Ok(operationResult)
+                : BadRequest(operationResult);
         }
 
         /// <summary>

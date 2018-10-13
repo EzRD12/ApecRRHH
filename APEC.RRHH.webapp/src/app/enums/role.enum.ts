@@ -1,7 +1,7 @@
 export enum Role {
-    candidateEmployee = 1,
-    employee = 2,
-    supervisor = 3,
-    manager = 4,
+    CandidateEmployee = 1,
+    Employee = 2,
+    Supervisor = 3,
+    Manager = 4,
     Administrator = 5
 }

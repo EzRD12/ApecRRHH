@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { DashboardComponent } from './dashboard.component';
+import { DashboardService } from '../services/dashboard.service';
 
 const routes = [
     {
@@ -21,6 +22,7 @@ const routes = [
         ReactiveFormsModule
     ],
     declarations: [DashboardComponent],
+    providers: [DashboardService],
     exports: [DashboardComponent]
 })
 export class DashboardModule {

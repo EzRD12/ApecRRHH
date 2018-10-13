@@ -32,7 +32,7 @@ namespace Web.Api.Controllers
             IOperationResult<CandidateEmployee> operationResult = _candidateEmployeeManager.Create(candidateEmployee);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
     }

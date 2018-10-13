@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
-import { AdministrationComponent } from './administration/administration.component';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { CandidateComponent } from './candidate/candidate.component';
@@ -19,6 +18,7 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { TableComponent } from './table/table.component';
 import { UserComponent } from './user/user.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -33,8 +33,7 @@ import { UserComponent } from './user/user.component';
     ProfileComponent,
     CandidateComponent,
     EmployeeComponent,
-    DepartamentComponent,
-    AdministrationComponent
+    DepartamentComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +42,7 @@ import { UserComponent } from './user/user.component';
     HttpClientModule,
     NavbarModule,
     FooterModule,
+    SharedModule,
     NgZorroAntdModule
   ],
   providers: [

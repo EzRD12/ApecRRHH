@@ -35,7 +35,7 @@ namespace Web.Api.Controllers
             IOperationResult<Job> operationResult = _jobManager.Create(job);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -55,7 +55,7 @@ namespace Web.Api.Controllers
             IOperationResult<Job> operationResult = _jobManager.Update(job);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -75,7 +75,7 @@ namespace Web.Api.Controllers
             IOperationResult<IEnumerable<Employee>> operationResult = _jobManager.DisableJob(jobId);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -96,7 +96,7 @@ namespace Web.Api.Controllers
             IOperationResult<Job> operationResult = _jobManager.Find(jobId);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
     }

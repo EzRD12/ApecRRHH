@@ -52,7 +52,7 @@ namespace Core.Managers
 
         public IOperationResult<IEnumerable<Job>> GetVacanciesAvailable()
         {
-            IEnumerable<Job> jobs = _jobRepository.FindAll(job => job.QuantityOfEmployeesNeeded < job.Employees.Count, job => job.Employees);
+            IEnumerable<Job> jobs = _jobRepository.FindAll(job => job.QuantityOfEmployeesNeeded > job.Employees.Count, job => job.Employees);
 
             return BasicOperationResult<IEnumerable<Job>>.Ok(jobs);
         }
@@ -71,7 +71,7 @@ namespace Core.Managers
 
             if (jobFound.Employees.Any(employee => employee.Status != FeatureStatus.Disabled))
             {
-                employees = (_jobRepository.DeleteJob(jobId).Entity);
+                employees = (_jobRepository.DeleteJob(jobId).OperationResult);
 
             }
 

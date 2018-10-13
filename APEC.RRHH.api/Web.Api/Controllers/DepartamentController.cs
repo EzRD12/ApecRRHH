@@ -34,7 +34,7 @@ namespace Web.Api.Controllers
             IOperationResult<Departament> operationResult =  _departamentManager.Create(departament);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -54,7 +54,7 @@ namespace Web.Api.Controllers
             IOperationResult<Departament> operationResult = _departamentManager.Find(departamentId);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
     }

@@ -31,7 +31,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'administration',
-                loadChildren: './dashboard/dashboard.module#DashboardModule',
+                loadChildren: './administration/administration.module#AdministrationModule',
             },
             {
                 path: 'departament',

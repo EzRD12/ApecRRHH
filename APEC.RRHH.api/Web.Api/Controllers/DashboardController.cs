@@ -39,7 +39,7 @@ namespace Web.Api.Controllers
             IOperationResult<IEnumerable<Job>> operationResult = _jobManager.GetVacanciesAvailable();
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -59,7 +59,7 @@ namespace Web.Api.Controllers
             IOperationResult<IEnumerable<Employee>> operationResult = _employeeManager.GetAll();
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -79,7 +79,7 @@ namespace Web.Api.Controllers
             IOperationResult<IEnumerable<Job>> operationResult = _jobManager.GetAll();
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -99,7 +99,7 @@ namespace Web.Api.Controllers
             IOperationResult<IEnumerable<CandidateEmployee>> operationResult = _candidateEmployeeManager.GetAllActives();
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -116,10 +116,10 @@ namespace Web.Api.Controllers
         [ProducesResponseType(404)]
         public IActionResult GetCandidateEmployeeOnAcceptationProcess()
         {
-            IOperationResult<IEnumerable<CandidateEmployee>> operationResult = _candidateEmployeeManager.GetCandidateOnAcceptationProcess();
+            IOperationResult<IEnumerable<CandidateInterview>> operationResult = _candidateEmployeeManager.GetCandidateOnAcceptationProcess();
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
     }

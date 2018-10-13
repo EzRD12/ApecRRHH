@@ -23,9 +23,9 @@ export class AccountService {
      * @returns The userProfile info
      */
     authenticate(email: string, password: string): Promise<BasicOperationResult<UserProfile>> {
-        console.log(email);
-        console.log(password);
-        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/authenticate`, { email, password })
+        const authenticateUserRequest = { email, password };
+        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/authenticate`,
+         authenticateUserRequest)
             .toPromise()
             .then(resp => {
                 if (resp.success) {

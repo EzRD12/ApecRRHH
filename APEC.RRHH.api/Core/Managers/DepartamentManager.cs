@@ -46,11 +46,11 @@ namespace Core.Managers
 
             if (departament.Jobs.Any(job => job.Status != FeatureStatus.Disabled))
             {
-                jobs = _departamentRepository.DeleteDepartament(departamentId).Entity;
+                jobs = _departamentRepository.DeleteDepartament(departamentId).OperationResult;
 
                 foreach (var departamentJob in departament.Jobs)
                 {
-                    employees.AddRange(_jobRepository.DeleteJob(departamentJob.Id).Entity);
+                    employees.AddRange(_jobRepository.DeleteJob(departamentJob.Id).OperationResult);
                 }
             }
 

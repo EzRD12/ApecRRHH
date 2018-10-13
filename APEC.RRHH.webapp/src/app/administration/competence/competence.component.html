@@ -1,0 +1,34 @@
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear competencia" [nzFooter]="modalFooter">
+  Indique la descripcion de la competencia
+  <textarea rows="4" nz-input [(ngModel)]="inputValue"></textarea>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="changeModalVisibility(false)">Cancel</button>
+    <button nz-button nzType="primary" (click)="createCompetence()" [nzLoading]="isConfirmLoading">Crear</button>
+  </ng-template>
+</nz-modal>
+<nz-card  class="col-lg-10" [nzLoading]="isDataLoading">
+  <nz-table #basicTable [nzData]="competences">
+    <thead>
+      <tr>
+        <th *ngFor="let header of competenceHeaders">{{ header }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.description}}</td>
+        <td>{{data.status | featureStatus}}</td>
+        <td>
+          <a>Editar</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Borrar</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>
+<div class="col-lg-2">
+  <button class="pull-right col-lg-6" (click)="changeModalVisibility(true)" nz-button nzSize="large" nzType="primary">Crear</button>
+</div>

@@ -18,8 +18,8 @@ export class UserProfile {
     identification: string;
     identificationType: IdentificationType;
     birthDate: Date;
-    userCompetences: Competence[];
-    userLanguages: Language[];
+    competences: Competence[];
+    languages: Language[];
     preparations: Preparation[];
     workExperiences: WorkExperience[];
     currentRole: Role;

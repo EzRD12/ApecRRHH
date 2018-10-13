@@ -34,7 +34,7 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult Authenticate([FromBody] AuthenticateUserRequest authenticateUserRequest)
+        public IActionResult Authenticate(AuthenticateUserRequest authenticateUserRequest)
         {
             IOperationResult<User> operationResult = _userManager.Authenticate(authenticateUserRequest);
 
@@ -60,7 +60,7 @@ namespace Web.Api.Controllers
             IOperationResult<User> operationResult = _userManager.Find(userId);
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
 
@@ -87,13 +87,13 @@ namespace Web.Api.Controllers
 
             CandidateEmployee candidateEmployee = new CandidateEmployee
             {
-                User = operationResult.Entity
+                User = operationResult.OperationResult
             };
 
             IOperationResult<CandidateEmployee> candidateEmployeeOperationResult = _candidateEmployeeManager.Create(candidateEmployee);
 
             return operationResult.Success
-                ? (IActionResult)Ok(candidateEmployeeOperationResult.Entity)
+                ? (IActionResult)Ok(candidateEmployeeOperationResult.OperationResult)
                 : BadRequest(candidateEmployeeOperationResult.Message);
         }
 
@@ -119,7 +119,7 @@ namespace Web.Api.Controllers
             }
 
             return operationResult.Success
-                ? (IActionResult)Ok(operationResult.Entity)
+                ? (IActionResult)Ok(operationResult.OperationResult)
                 : BadRequest(operationResult.Message);
         }
     }

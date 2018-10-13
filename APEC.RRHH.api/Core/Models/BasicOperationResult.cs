@@ -12,7 +12,7 @@ namespace Core.Models
         {
             Message = message;
             Success = success;
-            Entity = entity;
+            OperationResult = entity;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Core.Models
         /// <summary>
         /// Represents the operation result
         /// </summary>
-        public T Entity { get; }
+        public T OperationResult { get; }
 
         /// <summary>
         /// Creates an instance of <see cref="BasicOperationResult{T}"/> successful with the <see cref="T"/> default value

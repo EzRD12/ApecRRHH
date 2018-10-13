@@ -23,6 +23,6 @@ namespace Core.Contracts
         /// <summary>
         /// Represents the operation result's body
         /// </summary>
-        T Entity { get; }
+        T OperationResult { get; }
     }
 }

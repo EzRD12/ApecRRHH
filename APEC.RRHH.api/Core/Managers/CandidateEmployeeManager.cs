@@ -49,12 +49,11 @@ namespace Core.Managers
             return _candidateInterviewRepository.Create(candidateInterview);
         }
 
-        public IOperationResult<IEnumerable<CandidateEmployee>> GetCandidateOnAcceptationProcess()
+        public IOperationResult<IEnumerable<CandidateInterview>> GetCandidateOnAcceptationProcess()
         {
-            IEnumerable<CandidateEmployee> candidateEmployees = _candidateInterviewRepository.FindAll(employee => employee.InterviewDate.Date > DateTime.Today.Date)
-                .Select(employee => employee.CandidateEmployee);
+            IEnumerable<CandidateInterview> candidateEmployees = _candidateInterviewRepository.FindAll(employee => employee.InterviewDate.Date > DateTime.Today.Date);
 
-            return BasicOperationResult<IEnumerable<CandidateEmployee>>.Ok(candidateEmployees);
+            return BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(candidateEmployees);
         }
 
         public IOperationResult<IEnumerable<CandidateInterview>> GetAllInterviews() 

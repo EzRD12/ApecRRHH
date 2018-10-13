@@ -105,6 +105,10 @@ namespace Web.Api
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJobRepository, JobRepository>();
+            services.AddScoped<ICompetenceRepository, CompetenceRepository>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<IPreparationRepository, PreparationRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IDepartamentRepository, DepartamentRepository>();
             services.AddScoped<ICandidateEmployeeRepository, CandidateEmployeeRepository>();
             services.AddScoped<ICandidateInterviewRepository, CandidateInterviewRepository>();

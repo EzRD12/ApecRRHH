@@ -1,3 +1,24 @@
-<p>
-  departament works!
-</p>
+<nz-card>
+  <button class="pull-right" style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large" nzType="primary">Crear</button>
+  <nz-table #basicTable [nzData]="departaments">
+    <thead>
+      <tr>
+        <th *ngFor="let header of departamentHeaders">{{ header }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.name}}</td>
+        <td>{{data.status | featureStatus}}</td>
+        <td>
+          <a>Ver detalle</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Editar</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Borrar</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

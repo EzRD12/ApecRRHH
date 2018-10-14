@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { IconsComponent } from './icons/icons.component';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -35,7 +34,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'departament',
-                component: IconsComponent
+                loadChildren: './departament/departament.module#DepartamentModule',
             },
             {
                 path: 'employee',

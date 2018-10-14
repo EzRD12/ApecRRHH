@@ -3,21 +3,21 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { FeatureStatus } from '../enums/feature-status';
 import { BasicOperationResult } from '../interfaces/basic-operation-result';
-import { Language } from '../models/language';
+import { Departament } from '../models/departament';
 
 @Injectable()
-export class LanguageService {
+export class DepartamentService {
     constructor(private http: HttpClient) {
     }
 
-    create(description: string): Promise<BasicOperationResult<Language>> {
+    create(description: string): Promise<BasicOperationResult<Departament>> {
         const request = { description, status: FeatureStatus.enabled };
-        return this.http.post<BasicOperationResult<Language>>(`${environment.apecRRHHApiUrl}/configuration/language`, request)
+        return this.http.post<BasicOperationResult<Departament>>(`${environment.apecRRHHApiUrl}/departaments`, request)
         .toPromise();
     }
 
-    getAllLanguages(): Promise<BasicOperationResult<Language[]>> {
-        return this.http.get<BasicOperationResult<Language[]>>(`${environment.apecRRHHApiUrl}/configuration/language`)
+    getAllDepartaments(): Promise<Departament[]> {
+        return this.http.get<Departament[]>(`${environment.apecRRHHApiUrl}/departaments`)
         .toPromise();
     }
 }

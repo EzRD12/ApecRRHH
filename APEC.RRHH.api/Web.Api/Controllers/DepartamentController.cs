@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Contracts;
 using Core.Managers;
 using Core.Models;
@@ -8,7 +9,7 @@ using Web.Api.Filters;
 namespace Web.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/jobs")]
+    [Route("api/departaments")]
     public sealed class DepartamentController: Controller
     {
         private readonly DepartamentManager _departamentManager;
@@ -39,12 +40,32 @@ namespace Web.Api.Controllers
         }
 
         /// <summary>
-        /// Creates a departament
+        /// Gets all the departament
         /// </summary>
         /// <returns>A departament </returns>
         [HttpGet]
         [ModelStateFilter]
         [Route("")]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult GetAllDepartament()
+        {
+            IOperationResult<IEnumerable<Departament>> operationResult = _departamentManager.GetAll();
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.OperationResult)
+                : BadRequest(operationResult.Message);
+        }
+
+        /// <summary>
+        /// Get a departament
+        /// </summary>
+        /// <returns>A departament </returns>
+        [HttpGet]
+        [ModelStateFilter]
+        [Route("{departamentId}")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

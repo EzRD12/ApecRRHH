@@ -70,6 +70,15 @@ namespace Core.Managers
                 : BasicOperationResult<Departament>.Ok(departamentFound);
         }
 
+        public IOperationResult<IEnumerable<Departament>> GetAll()
+        {
+            IEnumerable<Departament> departamentFound = _departamentRepository.Get();
+
+            return departamentFound == null
+                ? BasicOperationResult<IEnumerable<Departament>>.Fail("DepartamentDoesNotExistOnRepository")
+                : BasicOperationResult<IEnumerable<Departament>>.Ok(departamentFound);
+        }
+
         public IOperationResult<Departament> EnableDepartament(Guid departamentId)
         {
             Departament departament = _departamentRepository.Find(depart => depart.Id == departamentId);

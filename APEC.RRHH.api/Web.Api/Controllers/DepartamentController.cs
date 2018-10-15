@@ -13,10 +13,12 @@ namespace Web.Api.Controllers
     public sealed class DepartamentController: Controller
     {
         private readonly DepartamentManager _departamentManager;
+        private readonly JobManager _jobManager;
 
-        public DepartamentController(DepartamentManager departamentManager)
+        public DepartamentController(DepartamentManager departamentManager, JobManager jobManager)
         {
             _departamentManager = departamentManager;
+            _jobManager = jobManager;
         }
 
         /// <summary>
@@ -73,6 +75,26 @@ namespace Web.Api.Controllers
         public IActionResult GetDepartament(Guid departamentId)
         {
             IOperationResult<Departament> operationResult = _departamentManager.Find(departamentId);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.OperationResult)
+                : BadRequest(operationResult.Message);
+        }
+
+        /// <summary>
+        /// Get a departament
+        /// </summary>
+        /// <returns>A departament </returns>
+        [HttpGet]
+        [ModelStateFilter]
+        [Route("{departamentId}/jobs")]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult GetDepartamentJobs(Guid departamentId)
+        {
+            IOperationResult<IEnumerable<Job>> operationResult = _jobManager.GetByDepartament(departamentId);
 
             return operationResult.Success
                 ? (IActionResult)Ok(operationResult.OperationResult)

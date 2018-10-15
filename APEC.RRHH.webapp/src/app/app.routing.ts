@@ -29,6 +29,10 @@ export const AppRoutes: Routes = [
                 component: TableComponent
             },
             {
+                path: 'staff',
+                loadChildren: './staff/staff.module#StaffModule',
+            },
+            {
                 path: 'administration',
                 loadChildren: './administration/administration.module#AdministrationModule',
             },

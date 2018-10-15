@@ -1,4 +1,4 @@
-<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear competencia" [nzFooter]="modalFooter">
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear competencia" (nzOnCancel)="changeModalVisibility(false)" [nzFooter]="modalFooter">
   Indique la descripcion de la competencia
   <textarea rows="4" nz-input [(ngModel)]="inputValue"></textarea>
   <ng-template #modalFooter>

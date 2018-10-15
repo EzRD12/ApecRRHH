@@ -9,7 +9,9 @@ import { UserProfile } from '../models/user-profile';
  *
  * @export
  */
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class AccountService {
     TOKEN_KEY = 'accessToken';
     constructor(private http: HttpClient) {
@@ -24,10 +26,9 @@ export class AccountService {
      */
     authenticate(email: string, password: string): Promise<BasicOperationResult<UserProfile>> {
         const authenticateUserRequest = { email, password };
-        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/authenticate`,
-         authenticateUserRequest)
-            .toPromise()
-            .then(resp => {
+        console.log(email);
+        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/authenticate`, 'ezrod12')
+            .toPromise().then(resp => {
                 if (resp.success) {
                     localStorage.setItem(this.TOKEN_KEY, JSON.stringify(resp));
                 }

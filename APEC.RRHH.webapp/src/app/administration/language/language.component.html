@@ -1,4 +1,4 @@
-<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear lenguaje" [nzFooter]="modalFooter">
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear lenguaje" (nzOnCancel)="changeModalVisibility(false)" [nzFooter]="modalFooter">
   Indique el nombre del lenguaje
   <textarea rows="4" nz-input [(ngModel)]="inputValue"></textarea>
   <ng-template #modalFooter>

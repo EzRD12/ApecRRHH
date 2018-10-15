@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -35,6 +36,7 @@ import { UserComponent } from './user/user.component';
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     NavbarModule,
     FooterModule,

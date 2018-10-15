@@ -89,6 +89,15 @@ namespace Core.Managers
                 : BasicOperationResult<Job>.Ok(entity);
         }
 
+        public IOperationResult<IEnumerable<Job>> GetByDepartament(Guid departamentId)
+        {
+            IEnumerable<Job> entity = _jobRepository.FindAll(job => job.DepartamentId == departamentId, departament => departament.Employees);
+
+            return entity == null
+                ? BasicOperationResult<IEnumerable<Job>>.Fail("JobDoesNotExistOnRepository")
+                : BasicOperationResult<IEnumerable<Job>>.Ok(entity);
+        }
+
         public IOperationResult<IEnumerable<Job>> GetAll()
         {
             IEnumerable<Job> jobs = _jobRepository.FindAll(job => job.Status == FeatureStatus.Enabled, departament => departament.Employees, job => job.Employees);

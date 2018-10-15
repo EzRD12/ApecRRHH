@@ -34,8 +34,9 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult Authenticate(AuthenticateUserRequest authenticateUserRequest)
+        public IActionResult Authenticate([FromBody] string email)
         {
+            AuthenticateUserRequest authenticateUserRequest = new AuthenticateUserRequest(email, "ewfewf");
             IOperationResult<User> operationResult = _userManager.Authenticate(authenticateUserRequest);
 
             return operationResult.Success

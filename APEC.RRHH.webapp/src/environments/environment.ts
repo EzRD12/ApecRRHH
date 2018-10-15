@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apecRRHHApiUrl: 'http://localhost:6982/api'
+  apecRRHHApiUrl: '/api'
 };

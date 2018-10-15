@@ -1,3 +1,129 @@
-<p>
-  departament-jobs works!
-</p>
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear puesto de trabajo" (nzOnCancel)="changeModalVisibility(false)" [nzFooter]="modalFooter">
+  <form nz-form nzLayout="horizontal" [formGroup]="createJobForm">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Nombre
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="text" nz-input formControlName="name" placeholder="Nombre">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Nivel de riesgo
+      </nz-form-label>
+      <nz-form-control [nzSpan]="30" [nzSm]="14" [nzXs]="26">
+        <nz-select formControlName="riskLevel">
+          <nz-option nzValue="1" nzLabel="Bajo"></nz-option>
+          <nz-option nzValue="2" nzLabel="Medio"></nz-option>
+          <nz-option nzValue="3" nzLabel="Alto"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Salario minimo
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="number" nz-input min="0" placeholder="Salario minimo" formControlName="minimumSalary" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Salario maximo
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="number" nz-input min="0" placeholder="Salario maximo" formControlName="maximumSalary" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <div class="">
+        <nz-form-label [nzSpan]="8" nzRequired>
+          Moneda de pago
+        </nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select style="width: 100%;" formControlName="currencyType">
+            <nz-option nzValue="1" nzLabel="Dolares norteamericos"></nz-option>
+            <nz-option nzValue="2" nzLabel="Pesos dominicanos"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </div>
+    </nz-form-item>
+    <nz-form-item>
+      <div class="">
+        <nz-form-label [nzSpan]="8" nzRequired>
+          Competencias
+        </nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select [nzMaxMultipleCount]="3" nzMode="multiple" nzPlaceHolder="Seleccione las competencias"
+            formControlName="competences">
+            <nz-option *ngFor="let competence of competences" [nzLabel]="competence.description" [nzValue]="competence.id"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </div>
+    </nz-form-item>
+    <nz-form-item>
+      <div class="">
+        <nz-form-label [nzSpan]="8" nzRequired>
+          Idiomas manejados
+        </nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select [nzMaxMultipleCount]="3" nzMode="multiple" nzPlaceHolder="Seleccione los idiomas" formControlName="languages">
+            <nz-option *ngFor="let language of languages" [nzLabel]="language.name" [nzValue]="language.id"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </div>
+    </nz-form-item>
+    <nz-form-item>
+      <div class="">
+        <nz-form-label [nzSpan]="8" nzRequired>
+          Personal requerido
+        </nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input type="number" nz-input min="0" placeholder="Personal requerido" formControlName="quantityOdEmployeesNeeded" />
+        </nz-form-control>
+      </div>
+    </nz-form-item>
+    <nz-form-item>
+      <div class="">
+        <nz-form-label [nzSpan]="12" nzRequired>
+          Años de experencia requeridos
+        </nz-form-label>
+        <nz-form-control [nzSpan]="8">
+          <input type="number" nz-input min="0" placeholder="Años de experencia requeridos" formControlName="minimumYearsExperienceLaboral" />
+        </nz-form-control>
+      </div>
+    </nz-form-item>
+  </form>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="changeModalVisibility(false)">Cancel</button>
+    <button nz-button nzType="primary" [disabled]="createJobForm.invalid" (click)="createJob()" [nzLoading]="isConfirmLoading">Crear</button>
+  </ng-template>
+</nz-modal>
+<nz-card>
+  <button style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large" nzType="primary">Crear</button>
+  <nz-table #basicTable [nzData]="jobs">
+    <thead>
+      <tr>
+        <th *ngFor="let header of jobsHeaders">{{ header }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.name}}</td>
+        <td>{{data.riskLevel | riskLevel}}</td>
+        <td>{{data.employees ? data.employees.length : 0}}</td>
+        <td>{{data.quantityOfEmployeesNeeded}}</td>
+        <td>{{data.status | featureStatus}}</td>
+        <td>
+          <a [routerLink]="['./', data.id]">Ver detalle</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Editar</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Borrar</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

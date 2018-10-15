@@ -4,6 +4,7 @@ using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using Core.Enums;
 using Web.Api.Filters;
 
 namespace Web.Api.Controllers
@@ -31,8 +32,9 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult CreateCompetence(Competence competence)
+        public IActionResult CreateCompetence([FromBody] string description)
         {
+            Competence competence = new Competence{ Description = description, Status = FeatureStatus.Enabled};
             IOperationResult<Competence> operationResult = _configurationManager.CreateCompetence(competence);
 
             return operationResult.Success

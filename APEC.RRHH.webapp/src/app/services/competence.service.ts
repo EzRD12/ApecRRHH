@@ -11,8 +11,9 @@ export class CompetenceService {
     }
 
     create(description: string): Promise<BasicOperationResult<Competence>> {
-        const request = { description, status: FeatureStatus.enabled };
-        return this.http.post<BasicOperationResult<Competence>>(`${environment.apecRRHHApiUrl}/configuration/competence`, request)
+        const request = { description: description, status: FeatureStatus.enabled };
+        console.log(request);
+        return this.http.post<BasicOperationResult<Competence>>(`${environment.apecRRHHApiUrl}/configuration/competence`, description)
         .toPromise();
     }
 

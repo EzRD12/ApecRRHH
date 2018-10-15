@@ -33,5 +33,4 @@ export class DepartamentComponent implements OnInit {
       this.isConfirmLoading = false;
     });
   }
-
 }

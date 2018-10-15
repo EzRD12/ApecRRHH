@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { FeatureStatus } from '../enums/feature-status';
 import { BasicOperationResult } from '../interfaces/basic-operation-result';
 import { Departament } from '../models/departament';
+import { Job } from '../models/job';
 
 @Injectable()
 export class DepartamentService {
@@ -18,6 +19,16 @@ export class DepartamentService {
 
     getAllDepartaments(): Promise<Departament[]> {
         return this.http.get<Departament[]>(`${environment.apecRRHHApiUrl}/departaments`)
+        .toPromise();
+    }
+
+    getDepartament(departamentId): Promise<Departament> {
+        return this.http.get<Departament>(`${environment.apecRRHHApiUrl}/departaments/${departamentId}`)
+        .toPromise();
+    }
+
+    getDepartamentJobs(departamentId): Promise<Job[]> {
+        return this.http.get<Job[]>(`${environment.apecRRHHApiUrl}/departaments/${departamentId}/jobs`)
         .toPromise();
     }
 }

@@ -82,7 +82,8 @@ namespace Boundaries.Persistence
         {
             EntityEntry entityEntry = _context.Entry(entity);
             entityEntry.State = EntityState.Modified;
-            return BasicOperationResult<T>.Ok();
+            _context.SaveChanges();
+            return BasicOperationResult<T>.Ok(entity);
         }
 
         IEnumerable<T> IGenericRepository<T>.FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)

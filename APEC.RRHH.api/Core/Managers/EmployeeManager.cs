@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Contracts;
+using Core.Enums;
 using Core.Models;
 using Core.Ports.Repositories;
 
@@ -24,9 +25,16 @@ namespace Core.Managers
                 : BasicOperationResult<Employee>.Ok(entity);
         }
 
+        public IOperationResult<Employee> Create(Employee employee)
+        {
+            IOperationResult<Employee> operationResult = _employeeRepository.Create(employee);
+
+            return operationResult;
+        }
+
         public IOperationResult<IEnumerable<Employee>> GetAll()
         {
-            IEnumerable<Employee> employees = _employeeRepository.Get();
+            IEnumerable<Employee> employees = _employeeRepository.GetAll();
 
             return BasicOperationResult<IEnumerable<Employee>>.Ok(employees);
         }
@@ -38,6 +46,15 @@ namespace Core.Managers
             return employeeFound == null
                 ? BasicOperationResult<Employee>.Fail("EmployeeDoesNotExistOnRepository")
                 : _employeeRepository.Update(employee);
+        }
+
+        public IOperationResult<Employee> ChangeStatus(Guid employeeId)
+        {
+            Employee employeeFound = _employeeRepository.Find(emplo => emplo.Id == employeeId);
+
+            employeeFound.Status = employeeFound.Status == FeatureStatus.Disabled ? FeatureStatus.Enabled : FeatureStatus.Disabled;
+
+            return Update(employeeFound);
         }
     }
 }

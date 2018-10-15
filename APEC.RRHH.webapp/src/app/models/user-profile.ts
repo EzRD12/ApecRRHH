@@ -17,7 +17,7 @@ export class UserProfile {
     fullName: string;
     identification: string;
     identificationType: IdentificationType;
-    birthDate: Date;
+    birthdate: Date;
     competences: Competence[];
     languages: Language[];
     preparations: Preparation[];

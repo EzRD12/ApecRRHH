@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   employees: Employee[] = [];
   userCandidateEmployees: any[] = [];
   candidateInterviews: any[] = [];
+  isVacanciesLoading = true;
   quantityOfVacancies = 0;
   vacanciesHeaders = ['Nombre', 'Riesgo', 'Salario minimo', 'Salario maximo', 'Tipo moneda'];
   jobsHeaders = ['Nombre', 'Riesgo', 'Personal actual', 'Personal requerido'];
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit() {
     this.dashboardService.getVacanciesAvailables().then(data => {
+      this.isVacanciesLoading = false;
       this.vacancies = data;
       data.map(vacancie => this.quantityOfVacancies = this.quantityOfVacancies + vacancie.quantityOfEmployeesNeeded);
     });

@@ -1,3 +1,93 @@
-<nz-card>
-  
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Detalle del empleado {{employeeSelected ? employeeSelected.user.name: ''}}"
+    (nzOnCancel)="changeModalVisibility(false)" (nzOnOk)="changeModalVisibility(false)">
+    <form nz-form nzLayout="horinzotal" [formGroup]="detailForm">
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Nombre</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.user.fullName">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Correo Electronico</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.user.email">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Identificacion</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.user.identification">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Fecha de nacimiento</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.user.birthdate | date: 'longDate'">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Rol</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.user.currentRole | role">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Puesto actual</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.job.name">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Salario mensual</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.monthlySalary | currency">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Moneda de pago</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.job.currencyType | currencyType">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Fecha de ingreso</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.admissionDate | date: 'short'">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSpan]="8">Estado</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input readonly *ngIf="employeeSelected" [value]="employeeSelected.status | featureStatus">
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-modal>
+<nz-card [nzLoading]="isDataLoading">
+    <nz-table #basicTable [nzData]="displayData">
+        <thead>
+            <tr>
+                <th *ngFor="let header of employeesHeaders">{{ header }}</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of basicTable.data">
+                <td>{{data.name}}</td>
+                <td>{{data.email}}</td>
+                <td>{{data.identification}}</td>
+                <td>{{data.role | role}}</td>
+                <td>{{data.currentJob}}</td>
+                <td>{{data.admissionDate | date: 'short'}}</td>
+                <td>{{data.status | featureStatus}}</td>
+                <td>
+                    <a (click)="getEmployeeDetail(data.id)">Ver detalle</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a>Editar</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a (click)="changeStatusEmployee(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
 </nz-card>

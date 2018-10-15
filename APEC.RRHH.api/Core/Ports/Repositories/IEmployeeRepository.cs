@@ -1,9 +1,11 @@
-﻿using Core.Contracts;
+﻿using System.Collections.Generic;
+using Core.Contracts;
 using Core.Models;
 
 namespace Core.Ports.Repositories
 {
     public interface IEmployeeRepository : IGenericRepository<Employee>
     {
+        IEnumerable<Employee> GetAll();
     }
 }

@@ -11,13 +11,24 @@ export class LanguageService {
     }
 
     create(description: string): Promise<BasicOperationResult<Language>> {
-        const request = { description, status: FeatureStatus.enabled };
-        return this.http.post<BasicOperationResult<Language>>(`${environment.apecRRHHApiUrl}/configuration/language`, request)
+        const request = { name: description, status: FeatureStatus.enabled };
+        return this.http.post<BasicOperationResult<Language>>(`${environment.apecRRHHApiUrl}/configuration/languages`, request)
         .toPromise();
     }
 
     getAllLanguages(): Promise<BasicOperationResult<Language[]>> {
-        return this.http.get<BasicOperationResult<Language[]>>(`${environment.apecRRHHApiUrl}/configuration/language`)
+        return this.http.get<BasicOperationResult<Language[]>>(`${environment.apecRRHHApiUrl}/configuration/languages`)
+        .toPromise();
+    }
+
+    getLanguagesAvailables(): Promise<BasicOperationResult<Language[]>> {
+        return this.http.get<BasicOperationResult<Language[]>>(`${environment.apecRRHHApiUrl}/configuration/languages/availables`)
+        .toPromise();
+    }
+
+    changesLanguageStatus(languageId): Promise<BasicOperationResult<Language>> {
+        // tslint:disable-next-line:max-line-length
+        return this.http.patch<BasicOperationResult<Language>>(`${environment.apecRRHHApiUrl}/configuration/languages/${languageId}/status`, {})
         .toPromise();
     }
 }

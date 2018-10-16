@@ -121,7 +121,7 @@
           <nz-divider nzType="vertical"></nz-divider>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Borrar</a>
+          <a>{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

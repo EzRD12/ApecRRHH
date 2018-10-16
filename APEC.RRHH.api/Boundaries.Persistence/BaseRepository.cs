@@ -37,6 +37,7 @@ namespace Boundaries.Persistence
                 entity.Id = Guid.NewGuid();
             }
             _context.Add(entity);
+            _context.SaveChanges();
             return BasicOperationResult<T>.Ok(entity);
         }
 
@@ -60,6 +61,7 @@ namespace Boundaries.Persistence
         IOperationResult<T> IGenericRepository<T>.Remove(T entity)
         {
             _context.Remove(entity);
+            _context.SaveChanges();
             return BasicOperationResult<T>.Ok();
         }
 

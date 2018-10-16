@@ -7,7 +7,7 @@
   </ng-template>
 </nz-modal>
 <nz-card  class="col-lg-10" [nzLoading]="isDataLoading">
-  <nz-table #basicTable [nzData]="competences">
+  <nz-table #basicTable [(nzData)]="competences">
     <thead>
       <tr>
         <th *ngFor="let header of competenceHeaders">{{ header }}</th>
@@ -21,9 +21,7 @@
         <td>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Borrar</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a>Delete</a>
+          <a (click)="changeCompetenceStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

@@ -45,10 +45,10 @@ export class DepartamentJobsComponent implements OnInit {
     this.departamentService.getDepartamentJobs(this.departamentId).then( (data) => {
       this.jobs = data;
     });
-    this.competenceService.getAllCompetences().then( (data) => {
+    this.competenceService.getCompetencesAvailables().then( (data) => {
       this.competences = data.operationResult;
     });
-    this.languageService.getAllLanguages().then( (data) => {
+    this.languageService.getLanguagesAvailables().then( (data) => {
       this.languages = data.operationResult;
     });
   }
@@ -74,9 +74,9 @@ export class DepartamentJobsComponent implements OnInit {
   createJob() {
     this.isConfirmLoading = true;
     const job = this.createJobForm.getRawValue();
-    console.log(job);
     this.jobService.create(job).then((result) => {
-      this.departament.jobs.push(result.operationResult);
+      this.inputValue = '';
+      this.jobs.push(result.operationResult);
       this.isConfirmLoading = false;
     });
   }

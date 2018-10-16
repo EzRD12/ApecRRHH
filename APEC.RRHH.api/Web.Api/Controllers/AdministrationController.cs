@@ -26,15 +26,14 @@ namespace Web.Api.Controllers
         /// <param name="competence">An instance of <see cref="Competence"/></param>
         /// <returns>A competence</returns>
         [HttpPost]
-        [Route("competence")]
+        [Route("competences")]
         [ModelStateFilter]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult CreateCompetence([FromBody] string description)
+        public IActionResult CreateCompetence([FromBody] Competence competence)
         {
-            Competence competence = new Competence{ Description = description, Status = FeatureStatus.Enabled};
             IOperationResult<Competence> operationResult = _configurationManager.CreateCompetence(competence);
 
             return operationResult.Success
@@ -47,7 +46,7 @@ namespace Web.Api.Controllers
         /// </summary>
         /// <returns>A set of competences</returns>
         [HttpGet]
-        [Route("competence")]
+        [Route("competences")]
         [ModelStateFilter]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
@@ -63,18 +62,78 @@ namespace Web.Api.Controllers
         }
 
         /// <summary>
-        /// Creates a language
+        /// Gets all competences
         /// </summary>
-        /// <param name="language">An instance of <see cref="Language"/></param>
-        /// <returns>A language</returns>
-        [HttpPost]
-        [Route("language")]
+        /// <returns>A set of competences</returns>
+        [HttpGet]
+        [Route("competences/availables")]
         [ModelStateFilter]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult CreateLanguage(Language language)
+        public IActionResult GetCompetenceAvailables()
+        {
+            IOperationResult<IEnumerable<Competence>> operationResult = _configurationManager.GetCompetenceAvailable();
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult)
+                : BadRequest(operationResult);
+        }
+
+        /// <summary>
+        /// Changes the competence status
+        /// </summary>
+        /// <returns>A <see cref="Competence"/></returns>
+        [HttpPatch]
+        [Route("competences/{competenceId}/status")]
+        [ModelStateFilter]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult ChangesCompetenceStatus(Guid competenceId)
+        {
+            IOperationResult<Competence> operationResult = _configurationManager.ChangeCompetenceState(competenceId);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult)
+                : BadRequest(operationResult);
+        }
+
+        /// <summary>
+        /// Changes the language status
+        /// </summary>
+        /// <returns>A <see cref="Language"/></returns>
+        [HttpPatch]
+        [Route("languages/{languageId}/status")]
+        [ModelStateFilter]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult ChangesLanguageStatus(Guid languageId)
+        {
+            IOperationResult<Language> operationResult = _configurationManager.ChangeLanguageState(languageId);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult)
+                : BadRequest(operationResult);
+        }
+
+        /// <summary>
+        /// Creates a language
+        /// </summary>
+        /// <param name="language">An instance of <see cref="Language"/></param>
+        /// <returns>A language</returns>
+        [HttpPost]
+        [Route("languages")]
+        [ModelStateFilter]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult CreateLanguage([FromBody] Language language)
         {
             IOperationResult<Language> operationResult = _configurationManager.CreateLanguage(language);
 
@@ -88,7 +147,7 @@ namespace Web.Api.Controllers
         /// </summary>
         /// <returns>A set of languages</returns>
         [HttpGet]
-        [Route("language")]
+        [Route("languages")]
         [ModelStateFilter]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
@@ -97,6 +156,26 @@ namespace Web.Api.Controllers
         public IActionResult GetAllLanguages()
         {
             IOperationResult<IEnumerable<Language>> operationResult = _configurationManager.GetAllLanguages();
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult)
+                : BadRequest(operationResult);
+        }
+
+        /// <summary>
+        /// Get all the languages
+        /// </summary>
+        /// <returns>A set of languages</returns>
+        [HttpGet]
+        [Route("languages/availables")]
+        [ModelStateFilter]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult GetLanguagesAvailables()
+        {
+            IOperationResult<IEnumerable<Language>> operationResult = _configurationManager.GetLanguageAvailables();
 
             return operationResult.Success
                 ? (IActionResult)Ok(operationResult)

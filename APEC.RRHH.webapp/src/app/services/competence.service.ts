@@ -13,12 +13,23 @@ export class CompetenceService {
     create(description: string): Promise<BasicOperationResult<Competence>> {
         const request = { description: description, status: FeatureStatus.enabled };
         console.log(request);
-        return this.http.post<BasicOperationResult<Competence>>(`${environment.apecRRHHApiUrl}/configuration/competence`, description)
+        return this.http.post<BasicOperationResult<Competence>>(`${environment.apecRRHHApiUrl}/configuration/competences`, request)
         .toPromise();
     }
 
     getAllCompetences(): Promise<BasicOperationResult<Competence[]>> {
-        return this.http.get<BasicOperationResult<Competence[]>>(`${environment.apecRRHHApiUrl}/configuration/competence`)
+        return this.http.get<BasicOperationResult<Competence[]>>(`${environment.apecRRHHApiUrl}/configuration/competences`)
+        .toPromise();
+    }
+
+    changesCompetenceStatus(competenceId): Promise<BasicOperationResult<Competence>> {
+        // tslint:disable-next-line:max-line-length
+        return this.http.patch<BasicOperationResult<Competence>>(`${environment.apecRRHHApiUrl}/configuration/competences/${competenceId}/status`, {})
+        .toPromise();
+    }
+
+    getCompetencesAvailables(): Promise<BasicOperationResult<Competence[]>> {
+        return this.http.get<BasicOperationResult<Competence[]>>(`${environment.apecRRHHApiUrl}/configuration/competences/availables`)
         .toPromise();
     }
 }

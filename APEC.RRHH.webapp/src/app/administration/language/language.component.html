@@ -21,9 +21,7 @@
         <td>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Borrar</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a>Delete</a>
+          <a (click)="changeLanguageStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

@@ -11,9 +11,9 @@ export class DepartamentService {
     constructor(private http: HttpClient) {
     }
 
-    create(description: string): Promise<BasicOperationResult<Departament>> {
-        const request = { description, status: FeatureStatus.enabled };
-        return this.http.post<BasicOperationResult<Departament>>(`${environment.apecRRHHApiUrl}/departaments`, request)
+    create(name: string): Promise<Departament> {
+        const request = { name, status: FeatureStatus.enabled };
+        return this.http.post<Departament>(`${environment.apecRRHHApiUrl}/departaments`, request)
         .toPromise();
     }
 

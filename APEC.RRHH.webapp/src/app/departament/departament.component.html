@@ -1,3 +1,11 @@
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear departamento" (nzOnCancel)="changeModalVisibility(false)" [nzFooter]="modalFooter">
+  Indique el nombre del departamento
+  <input nz-input placeholder="Nombre del departamento" [(ngModel)]="inputValue"/>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="changeModalVisibility(false)">Cancel</button>
+    <button nz-button nzType="primary" (click)="createDepartament()" [nzLoading]="isConfirmLoading">Crear</button>
+  </ng-template>
+</nz-modal>
 <nz-card>
   <button style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large" nzType="primary">Crear</button>
   <nz-table #basicTable [nzData]="departaments">
@@ -16,7 +24,7 @@
           <nz-divider nzType="vertical"></nz-divider>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Borrar</a>
+          <a (click)="changeCompetenceStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

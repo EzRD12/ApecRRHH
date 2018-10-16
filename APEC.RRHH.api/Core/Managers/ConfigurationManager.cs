@@ -63,7 +63,14 @@ namespace Core.Managers
             return BasicOperationResult<IEnumerable<Language>>.Ok(languages);
         }
 
-        public IOperationResult<Language> ChangeLanguageState(Guid languageId, FeatureStatus status)
+        public IOperationResult<IEnumerable<Language>> GetLanguageAvailables()
+        {
+            IEnumerable<Language> languages = _languageRepository.FindAll(language => language.Status == FeatureStatus.Enabled);
+
+            return BasicOperationResult<IEnumerable<Language>>.Ok(languages);
+        }
+
+        public IOperationResult<Language> ChangeLanguageState(Guid languageId)
         {
             Language languageFound = _languageRepository.Find(language => language.Id == languageId);
 
@@ -72,7 +79,7 @@ namespace Core.Managers
                 return BasicOperationResult<Language>.Fail("LanguageDoesNotExistOnRepository");
             }
 
-            languageFound.Status = status;
+            languageFound.Status = languageFound.Status == FeatureStatus.Enabled ? FeatureStatus.Disabled : FeatureStatus.Enabled;
 
             return _languageRepository.Update(languageFound);
         }
@@ -120,7 +127,14 @@ namespace Core.Managers
             return BasicOperationResult<IEnumerable<Competence>>.Ok(languages);
         }
 
-        public IOperationResult<Competence> ChangeCompetenceState(Guid competenceId, FeatureStatus status)
+        public IOperationResult<IEnumerable<Competence>> GetCompetenceAvailable()
+        {
+            IEnumerable<Competence> competences = _competenceRepository.FindAll(competence => competence.Status == FeatureStatus.Enabled);
+
+            return BasicOperationResult<IEnumerable<Competence>>.Ok(competences);
+        }
+
+        public IOperationResult<Competence> ChangeCompetenceState(Guid competenceId)
         {
             Competence competenceFound = _competenceRepository.Find(competence => competence.Id == competenceId);
 
@@ -129,7 +143,7 @@ namespace Core.Managers
                 return BasicOperationResult<Competence>.Fail("CompetenceDoesNotExistOnRepository");
             }
 
-            competenceFound.Status = status;
+            competenceFound.Status = competenceFound.Status == FeatureStatus.Enabled ? FeatureStatus.Disabled : FeatureStatus.Enabled;
 
             return _competenceRepository.Update(competenceFound);
         }

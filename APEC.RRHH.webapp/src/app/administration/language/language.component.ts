@@ -31,8 +31,22 @@ export class LanguageComponent implements OnInit {
   createLanguage() {
     this.isConfirmLoading = true;
     this.languageService.create(this.inputValue).then((result) => {
+      this.inputValue = '';
       this.languages.push(result.operationResult);
+      this.languages = [...this.languages];
       this.isConfirmLoading = false;
+      this.changeModalVisibility(false);
+    });
+  }
+
+  changeLanguageStatus(languageId) {
+    this.languageService.changesLanguageStatus(languageId).then(operationResult => {
+      if (operationResult.success) {
+        const language = operationResult.operationResult;
+        this.languages.forEach(data => data.status = data.id === language.id ? language.status : data.status);
+      } else {
+        console.log(operationResult.message);
+      }
     });
   }
 

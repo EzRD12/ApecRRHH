@@ -56,7 +56,6 @@ export class StaffComponent implements OnInit {
 
   changeStatusEmployee(employeeId) {
     this.employeeService.changeStatusEmployee(employeeId).then( employee => {
-      console.log(employee);
       this.employees.forEach( data => data.status = data.id === employee.id ? employee.status : data.status);
       this.displayData.forEach( data => data.status = data.id === employee.id ? employee.status : data.status);
     });

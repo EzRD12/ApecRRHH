@@ -30,7 +30,7 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult CreateAnEmployee(Employee employee)
+        public IActionResult CreateAnEmployee([FromBody] Employee employee)
         {
             IOperationResult<Employee> operationResult = _employeeManager.Create(employee);
 

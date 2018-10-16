@@ -32,7 +32,7 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult CreateDepartment(Departament departament)
+        public IActionResult CreateDepartment([FromBody] Departament departament)
         {
             IOperationResult<Departament> operationResult =  _departamentManager.Create(departament);
 

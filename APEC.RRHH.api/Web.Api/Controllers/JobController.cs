@@ -30,7 +30,7 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult CreateAJob(Job job)
+        public IActionResult CreateAJob([FromBody] Job job)
         {
             IOperationResult<Job> operationResult = _jobManager.Create(job);
 

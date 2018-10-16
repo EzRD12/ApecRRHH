@@ -31,8 +31,22 @@ export class CompetenceComponent implements OnInit {
   createCompetence() {
     this.isConfirmLoading = true;
     this.competenceService.create(this.inputValue).then((result) => {
+      this.inputValue = '';
       this.competences.push(result.operationResult);
+      this.competences = [...this.competences];
       this.isConfirmLoading = false;
+      this.changeModalVisibility(false);
+    });
+  }
+
+  changeCompetenceStatus(competenceId) {
+    this.competenceService.changesCompetenceStatus(competenceId).then(operationResult => {
+      if (operationResult.success) {
+        const competence = operationResult.operationResult;
+        this.competences.forEach(data => data.status = data.id === competence.id ? competence.status : data.status);
+      } else {
+        console.log(operationResult.message);
+      }
     });
   }
 

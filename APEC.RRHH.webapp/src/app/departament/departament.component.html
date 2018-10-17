@@ -24,7 +24,7 @@
           <nz-divider nzType="vertical"></nz-divider>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="changeCompetenceStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
+          <a (click)="data.status == 1 ? showConfirm(data) : changesDepartamentStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

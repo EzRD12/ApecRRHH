@@ -92,5 +92,39 @@ namespace Core.Managers
 
             return _departamentRepository.Update(departament);
         }
+
+        public IOperationResult<Departament> ChangesDepartamentStatus(Guid departamentId)
+        {
+            Departament departamentFound = _departamentRepository.Find(departament => departament.Id == departamentId, departament => departament.Jobs);
+
+            if (departamentFound == null)
+            {
+                return BasicOperationResult<Departament>.Fail("DepartamentDoesNotExistOnRepository");
+            }
+
+            departamentFound.Status = departamentFound.Status == FeatureStatus.Enabled ? FeatureStatus.Disabled : FeatureStatus.Enabled;
+
+            if (departamentFound.Status == FeatureStatus.Disabled)
+            {
+                departamentFound = DisabledDepartamentComplete(departamentFound);
+            }
+
+            return _departamentRepository.Update(departamentFound);
+        }
+
+        private Departament DisabledDepartamentComplete(Departament departamentFound)
+        {
+            foreach (var departamentJob in departamentFound.Jobs)
+            {
+                departamentJob.Status = FeatureStatus.Disabled;
+                departamentJob.Employees = _jobRepository.Find(job => job.Id == departamentJob.Id, job => job.Employees).Employees;
+                foreach (var employee in departamentJob.Employees)
+                {
+                    employee.Status = FeatureStatus.Disabled;
+                }
+            }
+
+            return departamentFound;
+        }
     }
 }

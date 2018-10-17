@@ -28,19 +28,21 @@ export class DepartamentComponent implements OnInit {
     this.modalVisibility = visibility;
   }
 
-  showConfirm(departamentName) {
+  showConfirm(departament: Departament) {
     this.modalService.confirm({
-      nzTitle: 'Esta por deshabilitar el departamento de ' + departamentName,
+      nzTitle: 'Deshabilitar el departamento de ' + departament.name,
       nzContent: 'Si realiza esta accion todos los puestos y empleados' +
         'de trabajo bajo este departamento seran deshabilitados de forma conjunta',
       nzOkText: 'Ok',
       nzCancelText: 'Cancel',
-      nzOnOk: () => this.changesDepartamentStatus()
+      nzOnOk: () => this.changesDepartamentStatus(departament.id)
     });
   }
 
-  changesDepartamentStatus() {
-    return '';
+  changesDepartamentStatus(departamentId) {
+    this.departamentService.changeDepartamentStatus(departamentId).then((result) => {
+      this.departaments.forEach(data => data.status = data.id === result.id ? result.status : data.status);
+    });
   }
 
   createDepartament() {

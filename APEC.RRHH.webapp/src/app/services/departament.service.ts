@@ -17,6 +17,11 @@ export class DepartamentService {
         .toPromise();
     }
 
+    changeDepartamentStatus(departamentId): Promise<Departament> {
+        return this.http.patch<Departament>(`${environment.apecRRHHApiUrl}/departaments/${departamentId}/status`, {})
+        .toPromise();
+    }
+
     getAllDepartaments(): Promise<Departament[]> {
         return this.http.get<Departament[]>(`${environment.apecRRHHApiUrl}/departaments`)
         .toPromise();

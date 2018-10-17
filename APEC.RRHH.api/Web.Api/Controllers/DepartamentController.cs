@@ -42,6 +42,26 @@ namespace Web.Api.Controllers
         }
 
         /// <summary>
+        /// Changes departament status
+        /// </summary>
+        /// <returns>A <see cref="Departament"/></returns>
+        [HttpPatch]
+        [ModelStateFilter]
+        [Route("{departamentId}/status")]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult ChangesDepartamentStatus(Guid departamentId)
+        {
+            IOperationResult<Departament> operationResult = _departamentManager.ChangesDepartamentStatus(departamentId);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.OperationResult)
+                : BadRequest(operationResult.Message);
+        }
+
+        /// <summary>
         /// Gets all the departament
         /// </summary>
         /// <returns>A departament </returns>

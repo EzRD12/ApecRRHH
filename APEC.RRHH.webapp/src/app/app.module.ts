@@ -1,12 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
-import { CandidateComponent } from './candidate/candidate.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { AuthComponent } from './layouts/auth/auth.component';
@@ -29,7 +28,6 @@ import { UserComponent } from './user/user.component';
     AdminComponent,
     NotFoundPageComponent,
     ProfileComponent,
-    CandidateComponent,
     EmployeeComponent
   ],
   imports: [

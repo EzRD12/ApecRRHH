@@ -1,3 +1,42 @@
-<p>
-  sign-up works!
-</p>
+<div class="limiter">
+  <div class="container-login100" style="background-image: url('assets/img/bg-01.jpg');">
+    <div class="wrap-login100 p-t-30 p-b-50">
+      <span class="login100-form-title p-b-41">
+        Registro de usuario
+      </span>
+      <form nz-form nzLayout="horizontal" [formGroup]="registerForm" style="padding-left: 2em; padding-right: 2em;"
+        (ngSubmit)="register()" class="login100-form validate-form" novalidate>
+        <div class="wrap-input100 validate-input" data-validate="Ingresa un nombre">
+          <input formControlName="name" class="input100" type="text" placeholder="Nombre">
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Ingresa un apellido">
+          <input formControlName="lastName" class="input100" type="text" placeholder="Apellido">
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Seleccion tipo de identificion">
+          <nz-select class="input100" formControlName="identificationType" nzAllowClear nzPlaceHolder="Seleccione tipo de identificacion">
+            <nz-option nzValue="1" nzLabel="Pasaporte"></nz-option>
+            <nz-option nzValue="2" nzLabel="Cedula"></nz-option>
+          </nz-select>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Ingresa identificacion">
+          <input formControlName="identification" class="input100" type="text" placeholder="Identificacion">
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Ingresa fecha de nacimiento">
+          <input formControlName="birthDate" class="input100" type="date" placeholder="Fecha de nacimiento">
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Ingresa correo">
+          <input formControlName="email" class="input100" type="text" placeholder="Correo electronico">
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="Ingresa un nombre">
+          <input formControlName="password" class="input100" type="password" placeholder="Contraseña">
+        </div>
+
+        <div class="container-login100-form-btn m-t-32">
+          <button nz-button nzType="primary"  [disabled]="registerForm.invalid" style="margin-bottom: 1em;" type="submit" class="login100-form-btn">
+            Registrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

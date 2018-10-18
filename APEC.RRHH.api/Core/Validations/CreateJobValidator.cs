@@ -18,8 +18,8 @@ namespace Core.Validations
             RuleFor(request => request.QuantityOfEmployeesNeeded).GreaterThan(0).WithMessage("InvalidQuantityOfEmployeesNeeded");
             RuleFor(request => request.Name).Must(ExistJobName).WithMessage("JobNameIsAlreadyInUsed");
             RuleFor(request => request.DepartamentId).Must(DepartamentExist).WithMessage("DepartamentDoesNotExistOnRepository");
-            RuleFor(request => request.JobCompetences.Count).GreaterThan(0).WithMessage("InvalidJobCompetencesCount");
-            RuleFor(request => request.JobLanguages.Count).GreaterThan(0).WithMessage("InvalidJobLanguagesCount");
+            RuleFor(request => request.Competences.Count).GreaterThan(0).WithMessage("InvalidJobCompetencesCount");
+            RuleFor(request => request.Languages.Count).GreaterThan(0).WithMessage("InvalidJobLanguagesCount");
 
         }
 

@@ -3,6 +3,7 @@ using Core.Managers;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using Core.Enums;
 using Web.Api.Filters;
 
 namespace Web.Api.Controllers
@@ -87,7 +88,8 @@ namespace Web.Api.Controllers
 
             CandidateEmployee candidateEmployee = new CandidateEmployee
             {
-                User = operationResult.OperationResult
+                User = operationResult.OperationResult,
+                Status = FeatureStatus.Enabled
             };
 
             IOperationResult<CandidateEmployee> candidateEmployeeOperationResult = _candidateEmployeeManager.Create(candidateEmployee);

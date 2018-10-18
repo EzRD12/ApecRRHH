@@ -9,5 +9,6 @@ namespace Core.Ports.Repositories
     {
         IOperationResult<IEnumerable<Job>> DeleteDepartament(Guid departamentId);
 
+        IEnumerable<Departament> GetAll();
     }
 }

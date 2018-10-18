@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardService } from '../services/dashboard.service';
+import { SharedModule } from '../shared/shared.module';
 
 const routes = [
     {
@@ -19,7 +20,8 @@ const routes = [
         CommonModule,
         NgZorroAntdModule,
         RouterModule.forChild(routes),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
     declarations: [DashboardComponent],
     providers: [DashboardService],

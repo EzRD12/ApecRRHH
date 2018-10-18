@@ -17,7 +17,7 @@ namespace Core.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public ISet<UserCompetence> UserCompetences { get; set; }
-        public ISet<UserLanguage> UserLanguages { get; set; }
+        public ISet<UserLanguage> Languages { get; set; }
         public ISet<Preparation> Preparations { get; set; }
         public ISet<WorkExperience> WorkExperiences { get; set; }
         public Role CurrentRole { get; set; }

@@ -56,6 +56,13 @@ namespace Core.Managers
             return BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(candidateEmployees);
         }
 
+        public IOperationResult<IEnumerable<CandidateInterview>> GetCandidateInterviewHistory()
+        {
+            IEnumerable<CandidateInterview> candidateEmployees = _candidateInterviewRepository.FindAll(employee => employee.InterviewDate.Date < DateTime.Today.Date);
+
+            return BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(candidateEmployees);
+        }
+
         public IOperationResult<IEnumerable<CandidateInterview>> GetAllInterviews() 
             => BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(_candidateInterviewRepository.Get());
 
@@ -79,6 +86,21 @@ namespace Core.Managers
             return _candidateInterviewRepository.Update(candidateInterview);
         }
 
+        public IOperationResult<CandidateInterview> ContractCandidate(Guid candidateInterviewId)
+        {
+            CandidateInterview candidateInterview = _candidateInterviewRepository.Find(candidate => candidate.Id == candidateInterviewId);
+            if (candidateInterview == null)
+            {
+                return BasicOperationResult<CandidateInterview>.Fail("InterviewDoesNotExistsOnRepository");
+            }
+
+            candidateInterview.Hired = true;
+            candidateInterview.Employee.Status = FeatureStatus.Disabled;
+            candidateInterview.Employee.User.CurrentRole = Role.Employee;
+
+            return _candidateInterviewRepository.Update(candidateInterview);
+        }
+
         public IOperationResult<CandidateEmployee> Find(Guid id)
         {
             CandidateEmployee candidateEmployee = _candidateEmployeeRepository.Find(candidate => candidate.Id == id);
@@ -87,7 +109,10 @@ namespace Core.Managers
 
         public IOperationResult<IEnumerable<CandidateEmployee>> GetAllActives()
         {
-            IEnumerable<CandidateEmployee> candidateEmployees = _candidateEmployeeRepository.FindAll(candidate => candidate.Status == FeatureStatus.Enabled);
+            IEnumerable<CandidateEmployee> candidateEmployees = _candidateEmployeeRepository.FindAll(candidate => candidate.Status == FeatureStatus.Enabled,
+                candidate => candidate.User,
+                employee => employee.User.Preparations,
+                employee => employee.User.Languages);
             return BasicOperationResult<IEnumerable<CandidateEmployee>>.Ok(candidateEmployees);
         }
 

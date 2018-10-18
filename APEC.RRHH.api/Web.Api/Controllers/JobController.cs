@@ -13,10 +13,12 @@ namespace Web.Api.Controllers
     public sealed class JobController : Controller
     {
         private readonly JobManager _jobManager;
+        private readonly EmployeeManager _employeeManager;
 
-        public JobController(JobManager jobManager)
+        public JobController(JobManager jobManager, EmployeeManager employeeManager)
         {
             _jobManager = jobManager;
+            _employeeManager = employeeManager;
         }
 
         /// <summary>
@@ -60,19 +62,39 @@ namespace Web.Api.Controllers
         }
 
         /// <summary>
-        /// Updates a job
+        /// Change a job status
         /// </summary>
         /// <returns>A job vacancies available</returns>
-        [HttpDelete]
+        [HttpPatch]
         [ModelStateFilter]
-        [Route("{jobId}")]
+        [Route("{jobId}/status")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult DisableAJob(Guid jobId)
+        public IActionResult ChangeJobStatus(Guid jobId)
         {
-            IOperationResult<IEnumerable<Employee>> operationResult = _jobManager.DisableJob(jobId);
+            IOperationResult<Job> operationResult = _jobManager.ChangeJobStatus(jobId);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.OperationResult)
+                : BadRequest(operationResult.Message);
+        }
+
+        /// <summary>
+        /// Get a job employees
+        /// </summary>
+        /// <returns>A set of <see cref="Employee"/></returns>
+        [HttpGet]
+        [ModelStateFilter]
+        [Route("{jobId}/employees")]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult GetJobEmployeesById(Guid jobId)
+        {
+            IOperationResult<IEnumerable<Employee>> operationResult = _employeeManager.GetJobEmployees(jobId);
 
             return operationResult.Success
                 ? (IActionResult)Ok(operationResult.OperationResult)

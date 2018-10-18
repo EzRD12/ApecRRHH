@@ -11,6 +11,7 @@ import { DepartamentComponent } from './departament.component';
 import { JobComponent } from './job/job.component';
 import { JobService } from '../services/job.service';
 import { CompetenceService } from '../services/competence.service';
+import { EmployeeService } from '../services/employee.service';
 
 const routes = [
     {
@@ -22,7 +23,7 @@ const routes = [
         component: DepartamentJobsComponent
     },
     {
-        path: ':id/:id',
+        path: ':id/:jobId',
         component: JobComponent
     }];
 
@@ -36,7 +37,7 @@ const routes = [
         SharedModule
     ],
     declarations: [DepartamentComponent, JobComponent, DepartamentJobsComponent],
-    providers: [DepartamentService, LanguageService, JobService, CompetenceService]
+    providers: [DepartamentService, LanguageService, JobService, CompetenceService, EmployeeService]
 })
 export class DepartamentModule {
 }

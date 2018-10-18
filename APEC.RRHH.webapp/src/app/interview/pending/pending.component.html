@@ -1,0 +1,27 @@
+<nz-card>
+  <div class="header">
+      <h4 class="title">Entrevistas pendientes</h4>
+  </div>
+  <div class="content">
+      <nz-table #candidateInterviewsTable [nzData]="candidateInterviews">
+          <thead>
+              <tr>
+                  <th *ngFor="let header of candidateInterviewsHeaders">{{ header }}</th>
+                  <th>Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let data of candidateInterviewsTable.data">
+                  <td>{{data.candidateFullName}}</td>
+                  <td>{{data.interviewer}}</td>
+                  <td>{{data.interviewDate | date: 'short'}}</td>
+                  <td>
+                      <a>Ver detalle</a>
+                      <nz-divider nzType="vertical"></nz-divider>
+                      <a>Delete</a>
+                  </td>
+              </tr>
+          </tbody>
+      </nz-table>
+  </div>
+</nz-card>

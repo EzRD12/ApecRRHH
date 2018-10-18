@@ -20,8 +20,8 @@ namespace Boundaries.Persistence.Configurations
             builder.Property(job => job.MinimumYearsExperienceLaboral).IsRequired();
             builder.Property(job => job.CurrencyType).IsRequired();
             builder.Property(job => job.MaximumSalary).IsRequired();
-            builder.HasMany(job => job.JobCompetences);
-            builder.HasMany(job => job.JobLanguages);
+            builder.HasMany(job => job.Competences);
+            builder.HasMany(job => job.Languages);
             builder.HasMany(job => job.Employees);
         }
     }

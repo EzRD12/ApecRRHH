@@ -30,7 +30,7 @@ namespace Boundaries.Persistence.Configurations
             builder.Property(p => p.Identification)
                 .IsRequired();
             builder.HasMany(user => user.UserCompetences);
-            builder.HasMany(user => user.UserLanguages);
+            builder.HasMany(user => user.Languages);
 
             builder.Ignore(user => user.FullName);
         }

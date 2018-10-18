@@ -1,0 +1,21 @@
+<nz-card  class="col-lg-10" [nzLoading]="isDataLoading">
+  <nz-table #candidateEmployeeTable [(nzData)]="userCandidateEmployees">
+    <thead>
+      <tr>
+        <th *ngFor="let header of candidateEmployeesHeaders">{{ header }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of candidateEmployeeTable.data">
+          <td>{{data.fullName}}</td>
+          <td>{{data.email}}</td>
+          <td>{{data.preparationsHandle}}</td>
+          <td>{{data.languagesHandle}}</td>
+          <td>
+              <a>Ver detalle</a>
+          </td>
+      </tr>
+  </tbody>
+  </nz-table>
+</nz-card>

@@ -12,7 +12,7 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Vacantes disponibles</p>
-                                {{quantityOfVacancies}}
+                                {{quantityOfVacancies - employees.length}}
                             </div>
                         </div>
                     </div>
@@ -119,14 +119,12 @@
                         <tbody>
                             <tr *ngFor="let data of vacanciesTable.data">
                                 <td>{{data.name}}</td>
-                                <td>{{data.riskLevel}}</td>
-                                <td>{{data.minimumSalary}}</td>
-                                <td>{{data.maximumSalary}}</td>
-                                <td>{{data.currencyType}}</td>
+                                <td>{{data.riskLevel | riskLevel}}</td>
+                                <td>{{data.minimumSalary | currency}}</td>
+                                <td>{{data.maximumSalary | currency}}</td>
+                                <td>{{data.currencyType | currencyType}}</td>
                                 <td>
                                     <a>Ver detalle</a>
-                                    <nz-divider nzType="vertical"></nz-divider>
-                                    <a>Delete</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -151,13 +149,11 @@
                         <tbody>
                             <tr *ngFor="let data of jobsTable.data">
                                 <td>{{data.name}}</td>
-                                <td>{{data.riskLevel}}</td>
-                                <td>5</td>
+                                <td>{{data.riskLevel | riskLevel}}</td>
+                                <td>{{data.employees.length}}</td>
                                 <td>{{data.quantityOfEmployeesNeeded}}</td>
                                 <td>
                                     <a>Ver detalle</a>
-                                    <nz-divider nzType="vertical"></nz-divider>
-                                    <a>Delete</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -188,8 +184,6 @@
                                 <td>{{data.languagesHandle}}</td>
                                 <td>
                                     <a>Ver detalle</a>
-                                    <nz-divider nzType="vertical"></nz-divider>
-                                    <a>Delete</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -217,8 +211,6 @@
                                 <td>{{data.interviewDate | date: 'short'}}</td>
                                 <td>
                                     <a>Ver detalle</a>
-                                    <nz-divider nzType="vertical"></nz-divider>
-                                    <a>Delete</a>
                                 </td>
                             </tr>
                         </tbody>

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AccountService } from '../services/account.service';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 const routes = [
     {
@@ -25,6 +26,7 @@ const routes = [
 @NgModule({
     imports: [
         CommonModule,
+        NgZorroAntdModule,
         RouterModule.forChild(routes),
         ReactiveFormsModule
     ],

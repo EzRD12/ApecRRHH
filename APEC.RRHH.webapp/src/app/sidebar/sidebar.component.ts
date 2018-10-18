@@ -13,8 +13,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/home', title: 'Inicio', icon: 'ti-home', class: '' },
     { path: '/profile', title: 'Perfil', icon: 'ti-user', class: '' },
     { path: '/staff', title: 'Personal', icon: 'ti-view-list-alt', class: '' },
-    { path: '/vacancies', title: 'Vacantes', icon: 'ti-clipboard', class: '' },
-    { path: '/candidate', title: 'Candidatos', icon: 'ti-bookmark', class: '' },
+    { path: '/interview', title: 'Entrevistas', icon: 'ti-clipboard', class: '' },
+    { path: '/candidate', title: 'Gestion de candidatos', icon: 'ti-bookmark', class: '' },
     { path: '/departament', title: 'Departamentos', icon: 'ti-map', class: '' },
     { path: '/administration', title: 'Administracion', icon: 'ti-world', class: '' }
 ];

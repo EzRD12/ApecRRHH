@@ -1,12 +1,13 @@
-<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear departamento" (nzOnCancel)="changeModalVisibility(false)" [nzFooter]="modalFooter">
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear departamento" (nzOnCancel)="changeModalVisibility(false)"
+  [nzFooter]="modalFooter">
   Indique el nombre del departamento
-  <input nz-input placeholder="Nombre del departamento" [(ngModel)]="inputValue"/>
+  <input nz-input placeholder="Nombre del departamento" [(ngModel)]="inputValue" />
   <ng-template #modalFooter>
     <button nz-button nzType="default" (click)="changeModalVisibility(false)">Cancel</button>
     <button nz-button nzType="primary" (click)="createDepartament()" [nzLoading]="isConfirmLoading">Crear</button>
   </ng-template>
 </nz-modal>
-<nz-card>
+<nz-card [nzLoading]="isDataLoading">
   <button style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large" nzType="primary">Crear</button>
   <nz-table #basicTable [nzData]="departaments">
     <thead>
@@ -18,13 +19,15 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>{{data.name}}</td>
+        <td>{{data.jobs.length}}</td>
         <td>{{data.status | featureStatus}}</td>
         <td>
           <a [routerLink]="['./', data.id]">Ver detalle</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="data.status == 1 ? showConfirm(data) : changesDepartamentStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
+          <a (click)="data.status == 1 ? showConfirm(data) : changesDepartamentStatus(data.id)">{{ data.status === 1 ?
+            'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

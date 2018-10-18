@@ -11,9 +11,10 @@ import { NzModalService } from 'ng-zorro-antd';
 export class DepartamentComponent implements OnInit {
   modalVisibility = false;
   isConfirmLoading = false;
+  isDataLoading = true;
   departaments: Departament[] = [];
   inputValue: string;
-  departamentHeaders = ['Nombre', 'Estado'];
+  departamentHeaders = ['Nombre', 'Cantidad de puestos', 'Estado'];
 
   constructor(private departamentService: DepartamentService,
     private modalService: NzModalService) { }
@@ -21,6 +22,7 @@ export class DepartamentComponent implements OnInit {
   ngOnInit() {
     this.departamentService.getAllDepartaments().then(data => {
       this.departaments = data;
+      this.isDataLoading = false;
     });
   }
 

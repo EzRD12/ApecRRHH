@@ -56,5 +56,12 @@ namespace Core.Managers
 
             return Update(employeeFound);
         }
+
+        public IOperationResult<IEnumerable<Employee>> GetJobEmployees(Guid jobId)
+        {
+            IEnumerable<Employee> entity = _employeeRepository.FindAll(employee => employee.JobId == jobId, employee => employee.User, employee => employee.Job);
+
+            return BasicOperationResult<IEnumerable<Employee>>.Ok(entity);
+        }
     }
 }

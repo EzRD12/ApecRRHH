@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  errorMessage: string;
   constructor(private formBuilder: FormBuilder,
     private accountService: AccountService,
     private router: Router) { }
@@ -23,7 +24,6 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate() {
-    console.log('some?');
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
 
@@ -31,8 +31,14 @@ export class LoginComponent implements OnInit {
       if (result.success) {
         this.router.navigate(['home']).then(() => {
         });
+      } else {
+        this.errorMessage = result.message === 'InvalidCredentials' ? 'Credenciales invalidas' : result.message;
       }
-    }).catch( (error) => console.log(error));
+    }).catch((error) => {
+      if (error.error.message === 'InvalidCredentials') {
+        this.errorMessage = 'Credenciales invalidas';
+      }
+    });
 
   }
 

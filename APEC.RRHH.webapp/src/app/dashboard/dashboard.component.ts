@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
   jobsHeaders = ['Nombre', 'Riesgo', 'Personal actual', 'Personal requerido'];
   candidateInterviewsHeaders = ['Candidato', 'Entrevistador', 'Fecha', 'Puesto apostado'];
   candidateEmployeesHeaders = ['Nombre completo', 'Correo Electronico', 'Cantidad preparaciones', 'Cantidad lenguajes'];
-  constructor(private dashboardService: DashboardService) {
 
-  }
+  constructor(private dashboardService: DashboardService) { }
+
   ngOnInit() {
     this.dashboardService.getVacanciesAvailables().then(data => {
       this.isVacanciesLoading = false;
@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
     });
 
     this.dashboardService.getCandidateEmployeesActives().then(data => {
+      console.log(data);
       this.userCandidateEmployees = data.map((candidate) => {
         return {
           fullName: candidate.user.fullName,

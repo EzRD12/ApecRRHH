@@ -72,7 +72,7 @@ namespace Core.Managers
 
         public IOperationResult<IEnumerable<Departament>> GetAll()
         {
-            IEnumerable<Departament> departamentFound = _departamentRepository.Get();
+            IEnumerable<Departament> departamentFound = _departamentRepository.GetAll();
 
             return departamentFound == null
                 ? BasicOperationResult<IEnumerable<Departament>>.Fail("DepartamentDoesNotExistOnRepository")

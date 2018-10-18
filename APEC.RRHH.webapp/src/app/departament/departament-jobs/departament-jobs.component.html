@@ -55,7 +55,7 @@
           Competencias
         </nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <nz-select [nzMaxMultipleCount]="3" nzMode="multiple" nzPlaceHolder="Seleccione las competencias"
+          <nz-select nzMode="multiple" nzPlaceHolder="Seleccione las competencias"
             formControlName="competences">
             <nz-option *ngFor="let competence of competences" [nzLabel]="competence.description" [nzValue]="competence.id"></nz-option>
           </nz-select>
@@ -68,7 +68,7 @@
           Idiomas manejados
         </nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <nz-select [nzMaxMultipleCount]="3" nzMode="multiple" nzPlaceHolder="Seleccione los idiomas" formControlName="languages">
+          <nz-select nzMode="multiple" nzPlaceHolder="Seleccione los idiomas" formControlName="languages">
             <nz-option *ngFor="let language of languages" [nzLabel]="language.name" [nzValue]="language.id"></nz-option>
           </nz-select>
         </nz-form-control>
@@ -80,7 +80,7 @@
           Personal requerido
         </nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <input type="number" nz-input min="0" placeholder="Personal requerido" formControlName="quantityOdEmployeesNeeded" />
+          <input type="number" nz-input min="0" placeholder="Personal requerido" formControlName="quantityOfEmployeesNeeded" />
         </nz-form-control>
       </div>
     </nz-form-item>
@@ -121,7 +121,7 @@
           <nz-divider nzType="vertical"></nz-divider>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
+          <a (click)="data.status == 1 ? showConfirm(data) : changesDepartamentStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

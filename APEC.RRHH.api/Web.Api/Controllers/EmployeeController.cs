@@ -85,7 +85,7 @@ namespace Web.Api.Controllers
         /// <returns>A <see cref="Employee"/></returns>
         [HttpPatch]
         [ModelStateFilter]
-        [Route("{employeeId}")]
+        [Route("{employeeId}/status")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

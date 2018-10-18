@@ -6,6 +6,7 @@ using Core.Ports.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Boundaries.Persistence.Repositories
 {
@@ -28,6 +29,12 @@ namespace Boundaries.Persistence.Repositories
             _dbContext.SaveChanges();
 
             return BasicOperationResult<IEnumerable<Job>>.Ok(jobs);
+        }
+
+        IEnumerable<Departament> IDepartamentRepository.GetAll()
+        {
+            IEnumerable<Departament> departaments = _dbContext.Departaments.Include(departament => departament.Jobs).AsEnumerable();
+            return departaments;
         }
     }
 }

@@ -26,7 +26,11 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'candidate',
-                component: TableComponent
+                loadChildren: './candidate/candidate.module#CandidateModule',
+            },
+            {
+                path: 'interview',
+                loadChildren: './interview/interview.module#InterviewModule',
             },
             {
                 path: 'staff',

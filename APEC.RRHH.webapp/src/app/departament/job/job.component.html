@@ -1,3 +1,27 @@
-<p>
-  job works!
-</p>
+<nz-card>
+  <nz-table #basicTable [nzData]="employees">
+    <thead>
+      <tr>
+        <th *ngFor="let header of employeesHeaders">{{ header }}</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.user.fullName}}</td>
+        <td>{{data.user.email}}</td>
+        <td>{{data.admissionDate | date: 'short'}}</td>
+        <td>{{data.monthlySalary | currency}}</td>
+        <td>{{data.job.currencyType | currencyType}}</td>
+        <td>{{data.status | featureStatus}}</td>
+        <td>
+          <a [routerLink]="['./', data.id]">Ver detalle</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Editar</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="changeStatusEmployee(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

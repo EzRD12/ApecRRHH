@@ -45,7 +45,7 @@ namespace Core.Managers
 
         public IOperationResult<User> Find(Guid userId)
         {
-            User userFound = _userRepository.Find(user => user.Id == userId, user => user.Preparations, user => user.UserCompetences, user => user.UserLanguages, user => user.WorkExperiences);
+            User userFound = _userRepository.Find(user => user.Id == userId, user => user.Preparations, user => user.UserCompetences, user => user.Languages, user => user.WorkExperiences);
             return userFound == null ? BasicOperationResult<User>.Fail("UserNotFound") : BasicOperationResult<User>.Ok(userFound);
         }
 

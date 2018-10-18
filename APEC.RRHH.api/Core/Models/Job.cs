@@ -18,8 +18,8 @@ namespace Core.Models
         public Departament Departament { get; set; }
         public Guid DepartamentId { get; set; }
         public ISet<Employee> Employees { get; set; }
-        public ISet<JobCompetence> JobCompetences { get; set; }
-        public ISet<JobLanguage> JobLanguages { get; set; }
+        public ISet<JobCompetence> Competences { get; set; }
+        public ISet<JobLanguage> Languages { get; set; }
         public ISet<CandidateInterview> Interviews { get; set; }
         public int MinimumYearsExperienceLaboral { get; set; }
     }

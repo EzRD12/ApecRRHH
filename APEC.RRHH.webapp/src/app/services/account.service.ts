@@ -11,7 +11,7 @@ import { UserProfile } from '../models/user-profile';
  */
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class AccountService {
     TOKEN_KEY = 'accessToken';
     constructor(private http: HttpClient) {
@@ -28,7 +28,7 @@ export class AccountService {
         const authenticateUserRequest = { email, password };
         console.log(email);
         return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/authenticate`,
-         authenticateUserRequest)
+            authenticateUserRequest)
             .toPromise().then(resp => {
                 if (resp.success) {
                     localStorage.setItem(this.TOKEN_KEY, JSON.stringify(resp));
@@ -42,5 +42,10 @@ export class AccountService {
      */
     logout(): void {
         localStorage.clear();
+    }
+
+    createUser(user) {
+        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts`,
+            user).toPromise();
     }
 }

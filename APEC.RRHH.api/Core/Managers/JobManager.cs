@@ -57,32 +57,31 @@ namespace Core.Managers
             return BasicOperationResult<IEnumerable<Job>>.Ok(jobs);
         }
 
-        public IOperationResult<IEnumerable<Employee>> DisableJob(Guid jobId)
+        public IOperationResult<Job> ChangeJobStatus(Guid jobId)
         {
-            IEnumerable<Employee> employees = null;
             Job jobFound = _jobRepository.Find(job => job.Id == jobId, job => job.Employees);
 
             if (jobFound == null)
             {
-                return BasicOperationResult<IEnumerable<Employee>>.Fail("JobNotFound");
+                return BasicOperationResult<Job>.Fail("JobNotFound");
             }
 
-            jobFound.Status = FeatureStatus.Disabled;
+            jobFound.Status = jobFound.Status == FeatureStatus.Enabled ? FeatureStatus.Disabled : FeatureStatus.Enabled;
 
-            if (jobFound.Employees.Any(employee => employee.Status != FeatureStatus.Disabled))
+            if (jobFound.Status == FeatureStatus.Disabled)
             {
-                employees = (_jobRepository.DeleteJob(jobId).OperationResult);
-
+                foreach (var employee in jobFound.Employees)
+                {
+                    employee.Status = FeatureStatus.Disabled;
+                }
             }
 
-            _jobRepository.Update(jobFound);
-
-            return BasicOperationResult<IEnumerable<Employee>>.Ok(employees);
+            return _jobRepository.Update(jobFound);
         }
 
         public IOperationResult<Job> Find(Guid jobId)
         {
-            Job entity = _jobRepository.Find(job => job.Id == jobId, departament => departament.Employees, job => job.JobCompetences, job => job.JobLanguages);
+            Job entity = _jobRepository.Find(job => job.Id == jobId, departament => departament.Employees, job => job.Competences, job => job.Languages);
 
             return entity == null
                 ? BasicOperationResult<Job>.Fail("JobDoesNotExistOnRepository")

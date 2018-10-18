@@ -25,7 +25,7 @@ export class EmployeeService {
     }
 
     changeStatusEmployee(employeeId): Promise<Employee> {
-        return this.http.patch<Employee>(`${environment.apecRRHHApiUrl}/employees/${employeeId}`, {})
+        return this.http.patch<Employee>(`${environment.apecRRHHApiUrl}/employees/${employeeId}/status`, {})
         .toPromise();
     }
 }

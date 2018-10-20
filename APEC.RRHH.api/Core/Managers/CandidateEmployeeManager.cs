@@ -15,16 +15,18 @@ namespace Core.Managers
         private readonly ICandidateEmployeeRepository _candidateEmployeeRepository;
         private readonly ICandidateInterviewRepository _candidateInterviewRepository;
         private readonly IJobRepository _jobRepository;
+        private readonly IUserRepository _userRepository;
         private readonly ICandidateEmployeeAspiratedJobRepository _candidateEmployeeAspiratedJobRepository;
 
 
         public CandidateEmployeeManager(ICandidateEmployeeRepository candidateEmployeeRepository, ICandidateEmployeeAspiratedJobRepository candidateEmployeeAspiratedJobRepository,
-            IJobRepository jobRepository, ICandidateInterviewRepository candidateInterviewRepository)
+            IJobRepository jobRepository, ICandidateInterviewRepository candidateInterviewRepository, IUserRepository userRepository)
         {
             _candidateEmployeeRepository = candidateEmployeeRepository;
             _candidateEmployeeAspiratedJobRepository = candidateEmployeeAspiratedJobRepository;
             _jobRepository = jobRepository;
             _candidateInterviewRepository = candidateInterviewRepository;
+            _userRepository = userRepository;
         }
 
         public IOperationResult<CandidateEmployee> Create(CandidateEmployee candidateEmployee)
@@ -116,6 +118,12 @@ namespace Core.Managers
             return BasicOperationResult<CandidateEmployee>.Ok(candidateEmployee);
         }
 
+        public IOperationResult<CandidateEmployee> FindByUserId(Guid userId)
+        {
+            CandidateEmployee candidateEmployee = _candidateEmployeeRepository.Find(candidate => candidate.UserId == userId);
+            return BasicOperationResult<CandidateEmployee>.Ok(candidateEmployee);
+        }
+
         public IOperationResult<IEnumerable<CandidateEmployee>> GetAllActives()
         {
             IEnumerable<CandidateEmployee> candidateEmployees = _candidateEmployeeRepository.FindAll(candidate => candidate.Status == FeatureStatus.Enabled,
@@ -136,11 +144,27 @@ namespace Core.Managers
                 return BasicOperationResult<CandidateEmployeeAspiratedJob>.Fail(errors);
             }
 
+            candidateEmployeeAspiratedJob.Status = FeatureStatus.Enabled;
             return _candidateEmployeeAspiratedJobRepository.Create(candidateEmployeeAspiratedJob);
         }
 
-        public IOperationResult<IEnumerable<CandidateEmployeeAspiratedJob>> GetAllAspirationJobs() 
-            => BasicOperationResult<IEnumerable<CandidateEmployeeAspiratedJob>>.Ok(_candidateEmployeeAspiratedJobRepository
-            .FindAll(aspirates => aspirates.Status == FeatureStatus.Enabled));
+        public IOperationResult<IEnumerable<CandidateEmployeeAspiratedJob>> GetAllAspirationJobs()
+        {
+            IEnumerable<CandidateEmployeeAspiratedJob> aspirations = _candidateEmployeeAspiratedJobRepository
+                .FindAll(aspirates => aspirates.Status == FeatureStatus.Enabled,
+                    job => job.CandidateEmployee,
+                    job => job.CandidateEmployee.User,
+                    job => job.Job);
+            foreach (var candidateEmployeeAspiratedJob in aspirations)
+            {
+                if (candidateEmployeeAspiratedJob.UserIdWhoRecommendedIt != null)
+                {
+                    candidateEmployeeAspiratedJob.UserWhoRecomendedIt = _userRepository.Find(user =>
+                        user.Id == candidateEmployeeAspiratedJob.UserIdWhoRecommendedIt);
+                }
+
+            }
+            return BasicOperationResult<IEnumerable<CandidateEmployeeAspiratedJob>>.Ok(aspirations);
+        }
     }
 }

@@ -64,6 +64,26 @@ namespace Web.Api.Controllers
         }
 
         /// <summary>
+        /// Gets all candidate employees actives
+        /// </summary>
+        /// <returns>A set of <see cref="CandidateEmployee"/> availables</returns>
+        [HttpGet]
+        [ModelStateFilter]
+        [Route("{userId}")]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult GetCandidateByUserId(Guid userId)
+        {
+            IOperationResult<CandidateEmployee> operationResult = _candidateEmployeeManager.FindByUserId(userId);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.OperationResult)
+                : BadRequest(operationResult.Message);
+        }
+
+        /// <summary>
         /// Gets all candidate interviews
         /// </summary>
         /// <returns>A set of <see cref="CandidateEmployee"/> availables</returns>
@@ -114,7 +134,7 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult CreateInterview(CandidateEmployeeAspiratedJob aspiratedJob)
+        public IActionResult AspireToJob( [FromBody] CandidateEmployeeAspiratedJob aspiratedJob)
         {
             IOperationResult<CandidateEmployeeAspiratedJob> operationResult = _candidateEmployeeManager.AspirateToJob(aspiratedJob);
 
@@ -154,7 +174,7 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult ContractCandidate(ContractCandidate contractCandidate)
+        public IActionResult ContractCandidate([FromBody] ContractCandidate contractCandidate)
         {
             IOperationResult<CandidateInterview> operationResult = _candidateEmployeeManager.ContractCandidate(contractCandidate.InterviewId);
 

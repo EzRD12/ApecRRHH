@@ -26,7 +26,6 @@ export class AccountService {
      */
     authenticate(email: string, password: string): Promise<BasicOperationResult<UserProfile>> {
         const authenticateUserRequest = { email, password };
-        console.log(email);
         return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/authenticate`,
             authenticateUserRequest)
             .toPromise().then(resp => {
@@ -58,7 +57,7 @@ export class AccountService {
     }
 
     updateUser(user) {
-        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts`,
+        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/update`,
             user).toPromise();
     }
 }

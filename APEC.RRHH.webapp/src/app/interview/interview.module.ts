@@ -9,6 +9,8 @@ import { PendingComponent } from './pending/pending.component';
 import { DashboardService } from '../services/dashboard.service';
 import { HistoricalComponent } from './historical/historical.component';
 import { InterviewService } from '../services/interview.service';
+import { RequestedComponent } from './requested/requested.component';
+import { JobService } from '../services/job.service';
 
 const routes = [
     {
@@ -25,8 +27,8 @@ const routes = [
         FormsModule,
         SharedModule
     ],
-    declarations: [InterviewComponent, PendingComponent, HistoricalComponent],
-    providers: [DashboardService, InterviewService]
+    declarations: [InterviewComponent, PendingComponent, HistoricalComponent, RequestedComponent],
+    providers: [DashboardService, InterviewService, JobService]
 })
 export class InterviewModule {
 }

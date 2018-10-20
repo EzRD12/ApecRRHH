@@ -18,7 +18,7 @@ export class Job {
     status: FeatureStatus;
     riskLevel: RiskLevel;
     employees: Employee[];
-    jobCompetences: Competence[];
-    jobLanguages: Language[];
+    competences: Competence[];
+    languages: Language[];
     interviews: CandidateInterview[];
 }

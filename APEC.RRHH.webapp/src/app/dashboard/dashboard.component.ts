@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
   searchChange$ = new BehaviorSubject('');
   aspirateToJobForm: FormGroup;
   vacancieSelected: Job;
+  aspireToJobmodalVisibility = false;
 
   constructor(private dashboardService: DashboardService,
     private accountService: AccountService,
@@ -98,25 +99,56 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  aspirateToJob() {
-    const aspirateJob = this.aspirateToJobForm.getRawValue();
-    aspirateJob.candidateEmployeeId = 1;
-    aspirateJob.jobId = this.vacancieSelected.id;
-
-    this.candidateService.aspirateToJob(aspirateJob).then((result) => {
-      if (result.success) {
-        this.displayToast('Exito', 'La operacion fue un exito', ToastType.Success);
-      } else {
-        this.displayToast('Ha ocurrido un error', result.message, ToastType.Success);
-      }
-    }).catch((error) => {
-      this.displayToast('Ha ocurrido un error', error.error.message, ToastType.Success);
-    });
+  setVacancieSelected(vacancie) {
+    this.vacancieSelected = vacancie;
   }
 
-  onSearch(value: string): void {
-    this.isSearchLoading = true;
-    this.searchChange$.next(value);
+  changeAspireToJobModalVisibility(visibility) {
+    this.aspireToJobmodalVisibility = visibility;
+  }
+
+  aspirateToJob() {
+    const currentUser = this.accountService.currentUser;
+    let userHasAllRequerimentsForJob = true;
+    for (const competence of this.vacancieSelected.competences) {
+      if (!currentUser.competences.some(userCompetence => userCompetence.id === competence.id)) {
+        this.displayToast('Lo sentimos', 'No posee las competencias requeridas para este puesto', ToastType.Info);
+        this.changeAspireToJobModalVisibility(false);
+        userHasAllRequerimentsForJob = false;
+        break;
+      }
+    }
+
+    for (const language of this.vacancieSelected.languages) {
+      if (!currentUser.languages.some(userCompetence => userCompetence.id === language.id)) {
+        this.displayToast('Lo sentimos', 'No maneja los idiomas requeridos para este puesto', ToastType.Info);
+        this.changeAspireToJobModalVisibility(false);
+        userHasAllRequerimentsForJob = false;
+        break;
+      }
+    }
+
+    if (!userHasAllRequerimentsForJob) {
+      return;
+    }
+
+    this.candidateService.getCandidateByUserId(currentUser.id).then((candidate) => {
+      const aspirateJob = this.aspirateToJobForm.getRawValue();
+      aspirateJob.candidateEmployeeId = candidate.id;
+      aspirateJob.jobId = this.vacancieSelected.id;
+      this.candidateService.aspirateToJob(aspirateJob).then((result) => {
+        if (result.success) {
+          this.buildAspirateJobForm();
+          this.displayToast('Exito', 'La operacion fue un exito', ToastType.Success);
+        } else {
+          this.displayToast('Ha ocurrido un error', result.message, ToastType.Success);
+        }
+        this.changeAspireToJobModalVisibility(false);
+      }).catch((error) => {
+        this.changeAspireToJobModalVisibility(false);
+        this.displayToast('Ha ocurrido un error', error.error.message, ToastType.Error);
+      });
+    });
   }
 
   displayToast(title: string, message: string, toastType: ToastType): void {

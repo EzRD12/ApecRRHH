@@ -34,7 +34,11 @@ namespace Core.Managers
 
         public IOperationResult<User> Authenticate(AuthenticateUserRequest request)
         {
-            User userFound = _userRepository.Find(user => user.Email == request.Email && user.Password == request.Password);
+            User userFound = _userRepository.Find(user => user.Email == request.Email && user.Password == request.Password,
+                user => user.Competences,
+                user => user.Languages,
+                user => user.Preparations,
+                user => user.WorkExperiences);
 
             if (userFound == null)
             {

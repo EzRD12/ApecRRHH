@@ -52,7 +52,9 @@ namespace Core.Managers
 
         public IOperationResult<IEnumerable<Job>> GetVacanciesAvailable()
         {
-            IEnumerable<Job> jobs = _jobRepository.FindAll(job => job.QuantityOfEmployeesNeeded > job.Employees.Count, job => job.Employees);
+            IEnumerable<Job> jobs = _jobRepository.FindAll(job => job.QuantityOfEmployeesNeeded > job.Employees.Count, job => job.Employees,
+                                                                                                                       job => job.Competences,
+                                                                                                                       job => job.Languages);
 
             return BasicOperationResult<IEnumerable<Job>>.Ok(jobs);
         }

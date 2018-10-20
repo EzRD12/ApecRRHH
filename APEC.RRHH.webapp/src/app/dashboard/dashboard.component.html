@@ -1,4 +1,4 @@
-<nz-modal [nzVisible]="modalVisibility" nzTitle="Aspirar a una vacante" (nzOnCancel)="changeModalVisibility(false)"
+<nz-modal [nzVisible]="aspireToJobmodalVisibility" nzTitle="Aspirar a una vacante" (nzOnCancel)="changeAspireToJobModalVisibility(false)"
     [nzFooter]="modalFooter">
     <form nz-form nzLayout="horizontal" [formGroup]="aspirateToJobForm">
         <nz-form-item>
@@ -10,28 +10,23 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-            <nz-form-label [nzSpan]="8" nzRequired>
+            <nz-form-label [nzSpan]="12" nzRequired>
                 Empleado que me recomendo
             </nz-form-label>
-            <nz-form-control [nzSpan]="30" [nzSm]="14" [nzXs]="26">
-                <nz-select nzAllowClear nzShowSearch [nzServerSearch]="true" (nzOnSearch)="onSearch($event)"
-                    formControlName="userIdWhoRecommendedIt">
-                    <nz-option *ngIf="!isSearchLoading" nzLabel="Nadie"></nz-option>
+            <nz-form-control [nzSpan]="10">
+                <nz-select nzAllowClear formControlName="userIdWhoRecommendedIt" nzPlaceholder="Seleccione una opcion">
+                    <nz-option nzValue="0" nzLabel="Nadie"></nz-option>
                     <ng-container *ngFor="let employee of employees">
-                        <nz-option *ngIf="!isSearchLoading" nzValue="employee.id"
-                            nzLabel="employee.user.fullName"></nz-option>
+                        <nz-option  [nzValue]="employee.id"
+                            [nzLabel]="employee.user.fullName"></nz-option>
                     </ng-container>
-
-                    <nz-option *ngIf="isSearchLoading" nzDisabled nzCustomContent>
-                        <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
-                    </nz-option>
                 </nz-select>
             </nz-form-control>
         </nz-form-item>
     </form>
     <ng-template #modalFooter>
-        <button nz-button nzType="default" (click)="changeModalVisibility(false)">Cancel</button>
-        <button nz-button nzType="primary" [disabled]="createJobForm.invalid" (click)="createJob()" [nzLoading]="isConfirmLoading">Crear</button>
+        <button nz-button nzType="default" (click)="changeAspireToJobModalVisibility(false)">Cancel</button>
+        <button nz-button nzType="primary" [disabled]="aspirateToJobForm.invalid" (click)="aspirateToJob()" [nzLoading]="isConfirmLoading">Crear</button>
     </ng-template>
 </nz-modal>
 <div class="container-fluid">
@@ -162,7 +157,7 @@
                                 <td>
                                     <a>Ver detalle</a>
                                     <nz-divider *ngIf="currentUser.currentRole === 1" nzType="vertical"></nz-divider>
-                                    <a *ngIf="currentUser.currentRole === 1">Postularme</a>
+                                    <a (click)="[changeAspireToJobModalVisibility(true) , setVacancieSelected(data)]" *ngIf="currentUser.currentRole === 1">Postularme</a>
                                 </td>
                             </tr>
                         </tbody>

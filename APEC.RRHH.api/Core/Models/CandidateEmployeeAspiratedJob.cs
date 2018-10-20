@@ -14,5 +14,6 @@ namespace Core.Models
         public FeatureStatus Status { get; set; }
         public int SalaryToAspire { get; set; }
         public Guid? UserIdWhoRecommendedIt { get; set; }
+        public User UserWhoRecomendedIt { get; set; }
     }
 }

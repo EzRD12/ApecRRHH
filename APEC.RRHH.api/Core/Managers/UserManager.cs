@@ -19,6 +19,7 @@ namespace Core.Managers
 
         public IOperationResult<User> Create(User user)
         {
+            user.CurrentRole = Role.CandidateEmployee;
             CreateUserValidator validator = new CreateUserValidator(_userRepository);
             FluentValidationsResult validationResult = validator.Validate(user);
 

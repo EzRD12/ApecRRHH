@@ -104,6 +104,46 @@ namespace Web.Api.Controllers
         }
 
         /// <summary>
+        /// Aspirates to a job
+        /// </summary>
+        /// <returns>A set of <see cref="CandidateEmployee"/> availables</returns>
+        [HttpPost]
+        [ModelStateFilter]
+        [Route("{candidateId}/aspirate")]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult CreateInterview(CandidateEmployeeAspiratedJob aspiratedJob)
+        {
+            IOperationResult<CandidateEmployeeAspiratedJob> operationResult = _candidateEmployeeManager.AspirateToJob(aspiratedJob);
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.OperationResult)
+                : BadRequest(operationResult.Message);
+        }
+
+        /// <summary>
+        /// Gets all the aspiration job
+        /// </summary>
+        /// <returns>A set of <see cref="CandidateEmployee"/> availables</returns>
+        [HttpGet]
+        [ModelStateFilter]
+        [Route("aspiration-jobs")]
+        [ProducesResponseType(typeof(Guid), 200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        [ProducesResponseType(404)]
+        public IActionResult GetAspirationJob()
+        {
+            IOperationResult<IEnumerable<CandidateEmployeeAspiratedJob>> operationResult = _candidateEmployeeManager.GetAllAspirationJobs();
+
+            return operationResult.Success
+                ? (IActionResult)Ok(operationResult.OperationResult)
+                : BadRequest(operationResult.Message);
+        }
+
+        /// <summary>
         /// Contract a candidate
         /// </summary>
         /// <returns>A <see cref="CandidateInterview"/></returns>

@@ -15,15 +15,16 @@ export interface RouteInfo {
 
 const AllRoles = [Role.CandidateEmployee, Role.Administrator, Role.Employee, Role.Manager, Role.Supervisor];
 const RolesWithoutCandidate = [ Role.Administrator, Role.Employee, Role.Manager, Role.Supervisor];
+const AdministrationRole = [Role.Administrator];
 
 export const ROUTES: RouteInfo[] = [
     { path: '/home', title: 'Inicio', icon: 'ti-home', class: '', roles: AllRoles},
     { path: '/profile', title: 'Perfil', icon: 'ti-user', class: '', roles: AllRoles },
     { path: '/staff', title: 'Personal', icon: 'ti-view-list-alt', class: '', roles: RolesWithoutCandidate },
-    { path: '/interview', title: 'Entrevistas', icon: 'ti-clipboard', class: '', roles: RolesWithoutCandidate },
-    { path: '/candidate', title: 'Gestion de candidatos', icon: 'ti-bookmark', class: '', roles: RolesWithoutCandidate },
+    { path: '/interview', title: 'Entrevistas', icon: 'ti-clipboard', class: '', roles: AdministrationRole },
+    { path: '/candidate', title: 'Gestion de candidatos', icon: 'ti-bookmark', class: '', roles: AdministrationRole },
     { path: '/departament', title: 'Departamentos', icon: 'ti-map', class: '', roles: RolesWithoutCandidate },
-    { path: '/administration', title: 'Administracion', icon: 'ti-world', class: '', roles: RolesWithoutCandidate }
+    { path: '/administration', title: 'Administracion', icon: 'ti-world', class: '', roles: AdministrationRole }
 ];
 
 @Component({

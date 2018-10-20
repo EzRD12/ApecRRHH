@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Contracts;
+using Core.Enums;
 
 namespace Core.Models
 {
@@ -10,6 +11,7 @@ namespace Core.Models
         public CandidateEmployee CandidateEmployee { get; set; }
         public Guid JobId { get; set; }
         public Job Job { get; set; }
+        public FeatureStatus Status { get; set; }
         public int SalaryToAspire { get; set; }
         public Guid? UserIdWhoRecommendedIt { get; set; }
     }

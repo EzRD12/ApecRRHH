@@ -31,14 +31,14 @@ namespace Core.Managers
         {
             bool candidateEmployeeExist = _candidateEmployeeRepository.Exists(candidate => candidate.UserId == candidateEmployee.UserId);
 
-            return candidateEmployeeExist 
-                ? BasicOperationResult<CandidateEmployee>.Fail("ThisUserHasAlreadyACandidateEmployeeProfile") 
+            return candidateEmployeeExist
+                ? BasicOperationResult<CandidateEmployee>.Fail("ThisUserHasAlreadyACandidateEmployeeProfile")
                 : _candidateEmployeeRepository.Create(candidateEmployee);
         }
 
         public IOperationResult<CandidateInterview> CreateCandidateInterview(CandidateInterview candidateInterview)
         {
-            bool interviewAlreadyExist = _candidateInterviewRepository.Exists(candidate => candidate.CandidateEmployeeId == candidateInterview.CandidateEmployeeId 
+            bool interviewAlreadyExist = _candidateInterviewRepository.Exists(candidate => candidate.CandidateEmployeeId == candidateInterview.CandidateEmployeeId
                                                                                             && candidate.JobId == candidateInterview.JobId);
 
             if (interviewAlreadyExist)
@@ -46,7 +46,16 @@ namespace Core.Managers
                 return BasicOperationResult<CandidateInterview>.Fail("AInterviewForThisCandidateAlreadyExists");
             }
 
-            return _candidateInterviewRepository.Create(candidateInterview);
+            IOperationResult<CandidateInterview> operationResult = _candidateInterviewRepository.Create(candidateInterview);
+
+            if (operationResult.Success)
+            {
+                CandidateEmployeeAspiratedJob aspiratedJob = operationResult.OperationResult.CandidateEmployeeAspiratedJob;
+                aspiratedJob.Status = FeatureStatus.Disabled;
+                _candidateEmployeeAspiratedJobRepository.Update(aspiratedJob);
+            }
+
+            return operationResult;
         }
 
         public IOperationResult<IEnumerable<CandidateInterview>> GetCandidateOnAcceptationProcess()
@@ -63,11 +72,11 @@ namespace Core.Managers
             return BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(candidateEmployees);
         }
 
-        public IOperationResult<IEnumerable<CandidateInterview>> GetAllInterviews() 
+        public IOperationResult<IEnumerable<CandidateInterview>> GetAllInterviews()
             => BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(_candidateInterviewRepository.Get());
 
         public IOperationResult<IEnumerable<CandidateInterview>> GetPendingInterviews()
-            => BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(_candidateInterviewRepository.FindAll(interview => !interview.Hired 
+            => BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(_candidateInterviewRepository.FindAll(interview => !interview.Hired
                                                                                                                            && interview.InterviewDate.Date > DateTime.Now.Date));
 
         public IOperationResult<CandidateInterview> FindInterviewProfile(Guid candidateInterviewId)
@@ -129,5 +138,9 @@ namespace Core.Managers
 
             return _candidateEmployeeAspiratedJobRepository.Create(candidateEmployeeAspiratedJob);
         }
+
+        public IOperationResult<IEnumerable<CandidateEmployeeAspiratedJob>> GetAllAspirationJobs() 
+            => BasicOperationResult<IEnumerable<CandidateEmployeeAspiratedJob>>.Ok(_candidateEmployeeAspiratedJobRepository
+            .FindAll(aspirates => aspirates.Status == FeatureStatus.Enabled));
     }
 }

@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
+        <div *ngIf="currentUser.currentRole !== 1" class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="content">
                     <div class="row">
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
+        <div *ngIf="currentUser.currentRole !== 1" class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="content">
                     <div class="row">
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
+        <div *ngIf="currentUser.currentRole !== 1" class="col-lg-3 col-sm-6">
             <div class="card">
                 <div class="content">
                     <div class="row">
@@ -153,7 +153,7 @@
                                 <td>{{data.employees.length}}</td>
                                 <td>{{data.quantityOfEmployeesNeeded}}</td>
                                 <td>
-                                    <a>Ver detalle</a>
+                                    <a [routerLink]="['/departament',data.departamentId, data.id]">Ver detalle</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -162,7 +162,7 @@
             </nz-card>
         </div>
     </div>
-    <div class="row">
+    <div *ngIf="currentUser.currentRole !== 1" class="row">
         <div class="col-md-6">
             <nz-card>
                 <div class="header">
@@ -173,7 +173,6 @@
                         <thead>
                             <tr>
                                 <th *ngFor="let header of candidateEmployeesHeaders">{{ header }}</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -182,9 +181,6 @@
                                 <td>{{data.email}}</td>
                                 <td>{{data.preparationsHandle}}</td>
                                 <td>{{data.languagesHandle}}</td>
-                                <td>
-                                    <a>Ver detalle</a>
-                                </td>
                             </tr>
                         </tbody>
                     </nz-table>

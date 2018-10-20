@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../../models/employee';
 import { JobService } from '../../services/job.service';
 import { EmployeeService } from '../../services/employee.service';
+import { Job } from '../../models/job';
 
 @Component({
   selector: 'app-job',
@@ -13,6 +14,8 @@ export class JobComponent implements OnInit {
 
   employees: Employee[] = [];
   jobId: string;
+  job: Job;
+  jobName: string;
   employeesHeaders = ['Nombre completo', 'Correo', 'Fecha de registro', 'Salario mensual', 'Tipo de moneda', 'Estado'];
 
   constructor(private jobService: JobService,
@@ -27,10 +30,14 @@ export class JobComponent implements OnInit {
     this.jobService.getJobEmployees(this.jobId).then( data => {
       this.employees = data;
     });
+
+    this.jobService.getJob(this.jobId).then( data => {
+      this.job = data;
+      this.jobName = this.job.name;
+    });
   }
 
   changeStatusEmployee(employeeId) {
-    console.log(employeeId);
     this.employeeService.changeStatusEmployee(employeeId).then( employee => {
       this.employees.forEach( data => data.status = data.id === employee.id ? employee.status : data.status);
     });

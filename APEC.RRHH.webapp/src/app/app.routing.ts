@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 import { AdminComponent } from './layouts/admin/admin.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-import { TableComponent } from './table/table.component';
-import { UserComponent } from './user/user.component';
 
 
 export const AppRoutes: Routes = [
@@ -22,7 +20,7 @@ export const AppRoutes: Routes = [
             },
             {
                 path: 'profile',
-                component: UserComponent
+                loadChildren: './user/user.module#UserModule',
             },
             {
                 path: 'candidate',

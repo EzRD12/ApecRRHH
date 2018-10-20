@@ -1,0 +1,136 @@
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear preparaciones" (nzOnCancel)="changeModalVisibility(false)"
+  [nzFooter]="modalFooter">
+  <form nz-form nzLayout="horizontal" [formGroup]="createPreparationForm">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Descripcion
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="text" nz-input formControlName="description" placeholder="Nombre">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Nivel academico
+      </nz-form-label>
+      <nz-form-control [nzSpan]="30" [nzSm]="14" [nzXs]="26">
+        <nz-select formControlName="academicLevel">
+          <nz-option nzValue="1" nzLabel="Tecnico"></nz-option>
+          <nz-option nzValue="2" nzLabel="Grado"></nz-option>
+          <nz-option nzValue="3" nzLabel="Post-grado"></nz-option>
+          <nz-option nzValue="4" nzLabel="Maestria"></nz-option>
+          <nz-option nzValue="5" nzLabel="Doctorado"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Desde
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="date" nz-input min="0" placeholder="Salario minimo" formControlName="dateFrom" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Hasta
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="date" nz-input min="0" placeholder="Salario maximo" formControlName="dateUp" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Institucion
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+          <input type="text" nz-input placeholder="Institucion" formControlName="institution" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="changeModalVisibility(false)">Cancel</button>
+    <button nz-button nzType="primary" [disabled]="createPreparationForm.invalid" (click)="createPreparation()"
+      [nzLoading]="isConfirmLoading">Crear</button>
+  </ng-template>
+</nz-modal>
+<nz-card>
+  <div class="header">
+    <h4 class="title" style="display: inline">Preparaciones</h4>
+    <button class="pull-right" style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large"
+      nzType="primary">Agregar</button>
+  </div>
+  <nz-table #editRowTable nzPageSize="5" nzBordered [nzData]="preparations">
+    <thead>
+      <tr>
+        <th nzWidth="15%">Descripcion</th>
+        <th nzWidth="15%">Nivel academico</th>
+        <th nzWidth="15%">Desde</th>
+        <th nzWidth="15%">Hasta</th>
+        <th nzWidth="30%">Institucion</th>
+        <th nzWidth="15%">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+        <td>
+          <div class="editable-cell">
+            <div class="editable-cell-text-wrapper">
+              <ng-container *ngIf="!editCache[data.key].edit">
+                {{data.description}}
+              </ng-container>
+              <ng-container *ngIf="editCache[data.key].edit">
+                <input type="text" nz-input [(ngModel)]="editCache[data.key].data.description">
+              </ng-container>
+            </div>
+          </div>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.academicLevel}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.academicLevel">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.dateFrom}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.dateFrom">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.dateUp}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.dateUp">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.institution}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.institution">
+          </ng-container>
+        </td>
+        <td>
+          <div class="editable-row-operations">
+            <ng-container *ngIf="!editCache[data.key].edit">
+              <a (click)="startEdit(data.key)">Editar</a>
+            </ng-container>
+            <ng-container *ngIf="editCache[data.key].edit">
+              <a (click)="saveEdit(data.key)">Guardar</a>
+              <nz-popconfirm [nzTitle]="'Sure to cancel?'" (nzOnConfirm)="cancelEdit(data.key)">
+                <a nz-popconfirm>Cancelar</a>
+              </nz-popconfirm>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

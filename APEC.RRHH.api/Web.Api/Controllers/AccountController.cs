@@ -94,9 +94,7 @@ namespace Web.Api.Controllers
 
             IOperationResult<CandidateEmployee> candidateEmployeeOperationResult = _candidateEmployeeManager.Create(candidateEmployee);
 
-            return operationResult.Success
-                ? (IActionResult)Ok(candidateEmployeeOperationResult.OperationResult)
-                : BadRequest(candidateEmployeeOperationResult.Message);
+            return Ok(candidateEmployeeOperationResult);
         }
 
         /// <summary>
@@ -104,9 +102,9 @@ namespace Web.Api.Controllers
         /// </summary>
         /// <param name="user">An instance of <see cref="User"/></param>
         /// <returns>Retrieves an identification for the user</returns>
-        [HttpPut]
+        [HttpPost]
         [ModelStateFilter]
-        [Route("")]
+        [Route("update")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

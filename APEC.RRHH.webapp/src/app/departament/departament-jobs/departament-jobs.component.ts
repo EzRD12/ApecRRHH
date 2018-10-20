@@ -22,6 +22,7 @@ export class DepartamentJobsComponent implements OnInit {
   modalVisibility = false;
   isConfirmLoading = false;
   departament: Departament;
+  departamentName: string;
   jobs: Job[] = [];
   inputValue: string;
   departamentId: string;
@@ -47,6 +48,10 @@ export class DepartamentJobsComponent implements OnInit {
     this.buildForm();
     this.departamentService.getDepartamentJobs(this.departamentId).then((data) => {
       this.jobs = data;
+    });
+    this.departamentService.getDepartament(this.departamentId).then((data) => {
+      this.departament = data;
+      this.departamentName = data.name;
     });
     this.competenceService.getCompetencesAvailables().then((data) => {
       this.competences = data.operationResult;

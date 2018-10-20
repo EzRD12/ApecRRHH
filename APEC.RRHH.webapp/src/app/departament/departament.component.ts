@@ -50,6 +50,7 @@ export class DepartamentComponent implements OnInit {
   createDepartament() {
     this.isConfirmLoading = true;
     this.departamentService.create(this.inputValue).then((result) => {
+      result.jobs = [];
       this.departaments.push(result);
       this.departaments = [...this.departaments];
       this.isConfirmLoading = false;

@@ -3,6 +3,8 @@ import { Employee } from '../models/employee';
 import { Job } from '../models/job';
 import { Vacancies } from '../models/vacancies';
 import { DashboardService } from '../services/dashboard.service';
+import { AccountService } from '../services/account.service';
+import { UserProfile } from '../models/user-profile';
 
 @Component({
   selector: 'dashboard-cmp',
@@ -12,6 +14,7 @@ import { DashboardService } from '../services/dashboard.service';
 
 export class DashboardComponent implements OnInit {
 
+  currentUser: UserProfile;
   vacancies: Vacancies[] = [];
   jobs: Job[] = [];
   employees: Employee[] = [];
@@ -24,9 +27,12 @@ export class DashboardComponent implements OnInit {
   candidateInterviewsHeaders = ['Candidato', 'Entrevistador', 'Fecha', 'Puesto apostado'];
   candidateEmployeesHeaders = ['Nombre completo', 'Correo Electronico', 'Cantidad preparaciones', 'Cantidad lenguajes'];
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService,
+              private accountService: AccountService) { }
 
   ngOnInit() {
+    this.currentUser = this.accountService.currentUser;
+
     this.dashboardService.getVacanciesAvailables().then(data => {
       this.isVacanciesLoading = false;
       this.vacancies = data;
@@ -42,7 +48,6 @@ export class DashboardComponent implements OnInit {
     });
 
     this.dashboardService.getCandidateEmployeesActives().then(data => {
-      console.log(data);
       this.userCandidateEmployees = data.map((candidate) => {
         return {
           fullName: candidate.user.fullName,

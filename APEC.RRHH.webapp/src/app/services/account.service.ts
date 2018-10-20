@@ -31,7 +31,7 @@ export class AccountService {
             authenticateUserRequest)
             .toPromise().then(resp => {
                 if (resp.success) {
-                    localStorage.setItem(this.TOKEN_KEY, JSON.stringify(resp));
+                    localStorage.setItem(this.TOKEN_KEY, JSON.stringify(resp.operationResult));
                 }
                 return resp;
             });
@@ -44,7 +44,20 @@ export class AccountService {
         localStorage.clear();
     }
 
+    public get currentUser(): UserProfile {
+        return JSON.parse(localStorage.getItem(this.TOKEN_KEY)) as UserProfile;
+    }
+
+    public getUser(userId): Promise<UserProfile> {
+        return this.http.get<UserProfile>(`${environment.apecRRHHApiUrl}/accounts/${userId}`).toPromise();
+    }
+
     createUser(user) {
+        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts`,
+            user).toPromise();
+    }
+
+    updateUser(user) {
         return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts`,
             user).toPromise();
     }

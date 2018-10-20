@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { AccountService } from '../services/account.service';
+import { ToastNotificationService } from '../services/toast-notification.service';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { AccountService } from '../services/account.service';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 const routes = [
     {
@@ -30,7 +31,7 @@ const routes = [
         RouterModule.forChild(routes),
         ReactiveFormsModule
     ],
-    providers: [AccountService],
+    providers: [AccountService, ToastNotificationService, ToastNotificationService],
     declarations: [LoginComponent, SignUpComponent],
 })
 export class PagesModule {

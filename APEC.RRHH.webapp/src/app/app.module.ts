@@ -15,15 +15,10 @@ import { FooterModule } from './shared/footer/footer.module';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { SharedModule } from './shared/shared.module';
 import { SidebarModule } from './sidebar/sidebar.module';
-import { TableComponent } from './table/table.component';
-import { UserComponent } from './user/user.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    TableComponent,
     AuthComponent,
     AdminComponent,
     NotFoundPageComponent,

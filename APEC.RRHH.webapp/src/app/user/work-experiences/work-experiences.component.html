@@ -1,0 +1,142 @@
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear experiencias laborales" (nzOnCancel)="changeModalVisibility(false)"
+  [nzFooter]="modalFooter">
+  <form nz-form nzLayout="horizontal" [formGroup]="createWorkExperienceForm">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Posicion
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="text" nz-input formControlName="position" placeholder="Nombre">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Salario
+      </nz-form-label>
+      <nz-form-control [nzSpan]="30" [nzSm]="14" [nzXs]="26">
+        <input type="number" nz-input min="0" placeholder="Salario" formControlName="dateFrom" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="10" nzRequired>
+        Tipo de moneda
+      </nz-form-label>
+      <nz-form-control [nzSpan]="30" [nzSm]="14" [nzXs]="26">
+        <nz-select formControlName="currencyType">
+          <nz-option nzValue="1" nzLabel="Dolares americanos"></nz-option>
+          <nz-option nzValue="2" nzLabel="Pesos dominicanos"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Desde
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="date" nz-input min="0" formControlName="dateFrom" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Hasta
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="date" nz-input min="0" formControlName="dateUp" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired>
+        Institucion
+      </nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input type="text" nz-input placeholder="Institucion" formControlName="institution" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <ng-template #modalFooter>
+    <button nz-button nzType="default" (click)="changeModalVisibility(false)">Cancel</button>
+    <button nz-button nzType="primary" [disabled]="createWorkExperienceForm.invalid" (click)="createWorkExperience()"
+      [nzLoading]="isConfirmLoading">Crear</button>
+  </ng-template>
+</nz-modal>
+<nz-card>
+  <div class="header">
+    <h4 class="title" style="display: inline">Experiencias laborales</h4>
+    <button class="pull-right" style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large"
+      nzType="primary">Agregar</button>
+  </div>
+  <nz-table #editRowTable nzPageSize="5" nzBordered [nzData]="preparations">
+    <thead>
+      <tr>
+        <th>Posicion</th>
+        <th>Desde</th>
+        <th>Hasta</th>
+        <th>Institucion</th>
+        <th>Salario</th>
+        <th>Moneda pago</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+        <td>
+          <div class="editable-cell">
+            <div class="editable-cell-text-wrapper">
+              <ng-container *ngIf="!editCache[data.key].edit">
+                {{data.description}}
+              </ng-container>
+              <ng-container *ngIf="editCache[data.key].edit">
+                <input type="text" nz-input [(ngModel)]="editCache[data.key].data.description">
+              </ng-container>
+            </div>
+          </div>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.academicLevel}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.academicLevel">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.dateFrom}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.dateFrom">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.dateUp}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.dateUp">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.key].edit">
+            {{data.institution}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.key].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.key].data.institution">
+          </ng-container>
+        </td>
+        <td>
+          <div class="editable-row-operations">
+            <ng-container *ngIf="!editCache[data.key].edit">
+              <a (click)="startEdit(data.key)">Editar</a>
+            </ng-container>
+            <ng-container *ngIf="editCache[data.key].edit">
+              <a (click)="saveEdit(data.key)">Guardar</a>
+              <nz-popconfirm [nzTitle]="'Sure to cancel?'" (nzOnConfirm)="cancelEdit(data.key)">
+                <a nz-popconfirm>Cancelar</a>
+              </nz-popconfirm>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

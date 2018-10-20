@@ -11,9 +11,9 @@ namespace Core.Validations
         public CreateUserValidator(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            RuleFor(request => request.Email).EmailAddress().WithMessage("InvalidEmail");
-            RuleFor(request => request.Email).Must(NotExistEmail).WithMessage("EmailIsAlreadyInUsed");
-            RuleFor(request => request.Password.Length).GreaterThan(5).WithMessage("InvalidPassword");
+            RuleFor(request => request.Email).EmailAddress().WithMessage("Correo electronico invalido");
+            RuleFor(request => request.Email).Must(NotExistEmail).WithMessage("El correo electronico esta actualmente en uso");
+            RuleFor(request => request.Password.Length).GreaterThan(5).WithMessage("Contraseña invalida");
         }
 
         private bool NotExistEmail(string email) 

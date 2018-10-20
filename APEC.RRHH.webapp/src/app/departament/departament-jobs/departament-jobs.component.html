@@ -1,4 +1,5 @@
-<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear puesto de trabajo" (nzOnCancel)="changeModalVisibility(false)" [nzFooter]="modalFooter">
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear puesto de trabajo" (nzOnCancel)="changeModalVisibility(false)"
+  [nzFooter]="modalFooter">
   <form nz-form nzLayout="horizontal" [formGroup]="createJobForm">
     <nz-form-item>
       <nz-form-label [nzSpan]="8" nzRequired>
@@ -55,8 +56,7 @@
           Competencias
         </nz-form-label>
         <nz-form-control [nzSpan]="14">
-          <nz-select nzMode="multiple" nzPlaceHolder="Seleccione las competencias"
-            formControlName="competences">
+          <nz-select nzMode="multiple" nzPlaceHolder="Seleccione las competencias" formControlName="competences">
             <nz-option *ngFor="let competence of competences" [nzLabel]="competence.description" [nzValue]="competence.id"></nz-option>
           </nz-select>
         </nz-form-control>
@@ -101,7 +101,10 @@
   </ng-template>
 </nz-modal>
 <nz-card>
-  <button style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large" nzType="primary">Crear</button>
+  <div class="header">
+    <h4 class="title" style="display: inline">{{departamentName}}</h4>
+    <button class="pull-right" style="margin-bottom:1em;" (click)="changeModalVisibility(true)" nz-button nzSize="large" nzType="primary">Crear</button>
+  </div>
   <nz-table #basicTable [nzData]="jobs">
     <thead>
       <tr>
@@ -121,7 +124,8 @@
           <nz-divider nzType="vertical"></nz-divider>
           <a>Editar</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="data.status == 1 ? showConfirm(data) : changesDepartamentStatus(data.id)">{{ data.status === 1 ? 'Deshabilitar' : 'Habilitar'}}</a>
+          <a (click)="data.status == 1 ? showConfirm(data) : changesDepartamentStatus(data.id)">{{ data.status === 1 ?
+            'Deshabilitar' : 'Habilitar'}}</a>
         </td>
       </tr>
     </tbody>

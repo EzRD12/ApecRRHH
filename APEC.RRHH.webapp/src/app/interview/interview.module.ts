@@ -11,6 +11,7 @@ import { HistoricalComponent } from './historical/historical.component';
 import { InterviewService } from '../services/interview.service';
 import { RequestedComponent } from './requested/requested.component';
 import { JobService } from '../services/job.service';
+import { ToastNotificationService } from '../services/toast-notification.service';
 
 const routes = [
     {
@@ -28,7 +29,7 @@ const routes = [
         SharedModule
     ],
     declarations: [InterviewComponent, PendingComponent, HistoricalComponent, RequestedComponent],
-    providers: [DashboardService, InterviewService, JobService]
+    providers: [DashboardService, InterviewService, JobService, ToastNotificationService]
 })
 export class InterviewModule {
 }

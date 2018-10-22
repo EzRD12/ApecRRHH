@@ -174,7 +174,7 @@ namespace Web.Api.Controllers
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]
         [ProducesResponseType(404)]
-        public IActionResult ContractCandidate([FromBody] ContractCandidate contractCandidate)
+        public IActionResult ContractCandidate( ContractCandidate contractCandidate)
         {
             IOperationResult<CandidateInterview> operationResult = _candidateEmployeeManager.ContractCandidate(contractCandidate.InterviewId);
 

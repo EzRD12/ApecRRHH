@@ -13,7 +13,7 @@ namespace Boundaries.Persistence.Configurations
             builder.Property(p => p.InterviewDate).IsRequired();
             builder.Property(p => p.CandidateEmployeeId).IsRequired();
             builder.Property(p => p.JobId).IsRequired();
-            builder.Property(p => p.EmployeeIdWhoInterviewed).IsRequired();
+            builder.Property(p => p.EmployeeId).IsRequired();
         }
     }
 }

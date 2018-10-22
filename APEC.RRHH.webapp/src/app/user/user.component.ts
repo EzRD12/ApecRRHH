@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { AccountService } from '../services/account.service';
-import { UserProfile } from '../models/user-profile';
-import { Preparation } from '../models/preparation';
-import { WorkExperience } from '../models/work-experience';
-import { CompetenceService } from '../services/competence.service';
-import { LanguageService } from '../services/language.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Competence } from '../models/competence';
 import { Language } from '../models/language';
-import * as moment from 'moment';
+import { Preparation } from '../models/preparation';
+import { UserProfile } from '../models/user-profile';
+import { WorkExperience } from '../models/work-experience';
+import { AccountService } from '../services/account.service';
+import { CompetenceService } from '../services/competence.service';
+import { LanguageService } from '../services/language.service';
 import { ToastNotificationService, ToastType } from '../services/toast-notification.service';
 
 @Component({
@@ -66,7 +65,6 @@ export class UserComponent implements OnInit {
 
     updateUser() {
         if (this.updateUserForm.invalid) {
-            console.log(this.updateUserForm);
             this.displayToast('Error en formulario', 'Favor verifique que la informacion suministrada este correctamente',
                 ToastType.Warning);
             return;
@@ -76,18 +74,17 @@ export class UserComponent implements OnInit {
 
         if (userUpdated.password !== userUpdated.passwordConfirmation) {
             this.displayToast('Error en formulario', 'La confirmacion de contraseña no coincide',
-            ToastType.Warning);
+                ToastType.Warning);
             return;
         }
         userUpdated.preparations = this.preparations;
         userUpdated.workExperiences = this.workExperiences;
+        userUpdated.id = this.user.id;
+        userUpdated.currentRole = this.user.currentRole;
+        console.log(userUpdated);
         this.accountService.updateUser(userUpdated).then(result => {
-            if (result.success) {
-                this.setUserSetting(result.operationResult);
-                this.displayToast('Actualizacion de usuario', 'Operacion exitosa', ToastType.Success);
-            } else {
-                this.displayToast('Error en actualizacion', result.message, ToastType.Error);
-            }
+            this.setUserSetting(result.operationResult);
+            this.displayToast('Actualizacion de usuario', 'Operacion exitosa', ToastType.Success);
         }).catch(error => console.log(error));
     }
 

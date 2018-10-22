@@ -102,9 +102,9 @@ namespace Web.Api.Controllers
         /// </summary>
         /// <param name="user">An instance of <see cref="User"/></param>
         /// <returns>Retrieves an identification for the user</returns>
-        [HttpPost]
+        [HttpPut]
         [ModelStateFilter]
-        [Route("update")]
+        [Route("{userId}")]
         [ProducesResponseType(typeof(Guid), 200)]
         [ProducesResponseType(typeof(Error), 400)]
         [ProducesResponseType(typeof(Error), 500)]

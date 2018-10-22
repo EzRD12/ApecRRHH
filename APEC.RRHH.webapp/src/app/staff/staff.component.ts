@@ -19,14 +19,14 @@ export class StaffComponent implements OnInit {
   modalVisibility = false;
 
   constructor(private employeeService: EmployeeService,
-              private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.detailForm = this.formBuilder.group({});
-    this.employeeService.getAllEmployees().then( (data) => {
+    this.employeeService.getAllEmployees().then((data) => {
       this.isDataLoading = false;
       this.employees = data;
-      this.displayData = this.employees.map( (employee) => {
+      this.displayData = this.employees.map((employee) => {
         return this.buildDisplayData(employee);
       });
     });
@@ -55,10 +55,14 @@ export class StaffComponent implements OnInit {
   }
 
   changeStatusEmployee(employeeId) {
-    this.employeeService.changeStatusEmployee(employeeId).then( employee => {
-      this.employees.forEach( data => data.status = data.id === employee.id ? employee.status : data.status);
-      this.displayData.forEach( data => data.status = data.id === employee.id ? employee.status : data.status);
+    this.employeeService.changeStatusEmployee(employeeId).then(employee => {
+      this.employees.forEach(data => data.status = data.id === employee.id ? employee.status : data.status);
+      this.displayData.forEach(data => data.status = data.id === employee.id ? employee.status : data.status);
     });
+  }
+
+  giveMeReport() {
+    window.print();
   }
 
 }

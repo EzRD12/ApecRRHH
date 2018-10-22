@@ -52,7 +52,7 @@ namespace Core.Managers
 
             if (operationResult.Success)
             {
-                CandidateEmployeeAspiratedJob aspiratedJob = operationResult.OperationResult.CandidateEmployeeAspiratedJob;
+                CandidateEmployeeAspiratedJob aspiratedJob = _candidateEmployeeAspiratedJobRepository.Find(aspiration => aspiration.Id == operationResult.OperationResult.CandidateEmployeeAspiratedJobId);
                 aspiratedJob.Status = FeatureStatus.Disabled;
                 _candidateEmployeeAspiratedJobRepository.Update(aspiratedJob);
             }
@@ -62,7 +62,12 @@ namespace Core.Managers
 
         public IOperationResult<IEnumerable<CandidateInterview>> GetCandidateOnAcceptationProcess()
         {
-            IEnumerable<CandidateInterview> candidateEmployees = _candidateInterviewRepository.FindAll(employee => employee.InterviewDate.Date > DateTime.Today.Date);
+            IEnumerable<CandidateInterview> candidateEmployees = _candidateInterviewRepository.FindAll(employee => employee.InterviewDate.Date > DateTime.Today.Date,
+                interview => interview.CandidateEmployee.User,
+                interview => interview.Employee,
+                interview => interview.Employee.User,
+                interview => interview.Job
+                );
 
             return BasicOperationResult<IEnumerable<CandidateInterview>>.Ok(candidateEmployees);
         }
@@ -157,10 +162,10 @@ namespace Core.Managers
                     job => job.Job);
             foreach (var candidateEmployeeAspiratedJob in aspirations)
             {
-                if (candidateEmployeeAspiratedJob.UserIdWhoRecommendedIt != null)
+                if (candidateEmployeeAspiratedJob.UserId != null)
                 {
                     candidateEmployeeAspiratedJob.UserWhoRecomendedIt = _userRepository.Find(user =>
-                        user.Id == candidateEmployeeAspiratedJob.UserIdWhoRecommendedIt);
+                        user.Id == candidateEmployeeAspiratedJob.UserId);
                 }
 
             }

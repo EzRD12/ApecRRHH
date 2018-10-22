@@ -15,6 +15,7 @@ export class PendingComponent implements OnInit {
 
   ngOnInit() {
     this.dashboardService.getCandidateEmployeesOnAcceptationProcess().then(data => {
+      console.log(data);
       this.candidateInterviews = data.map((interview) => {
         return {
           candidateFullName: interview.candidateEmployee.user.fullName,

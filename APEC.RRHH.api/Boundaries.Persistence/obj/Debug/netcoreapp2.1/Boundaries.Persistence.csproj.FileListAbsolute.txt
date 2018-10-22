@@ -12,6 +12,9 @@ F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2
 F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.csproj.CopyComplete
 F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.dll
 F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.pdb
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.csproj.CoreCompileInputs.cache
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.AssemblyInfoInputs.cache
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.AssemblyInfo.cs
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\bin\Debug\netcoreapp2.1\Boundaries.Persistence.deps.json
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\bin\Debug\netcoreapp2.1\Boundaries.Persistence.runtimeconfig.json
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\bin\Debug\netcoreapp2.1\Boundaries.Persistence.runtimeconfig.dev.json
@@ -20,9 +23,6 @@ F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\bin\Debug\netcoreapp2.
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\bin\Debug\netcoreapp2.1\Core.dll
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\bin\Debug\netcoreapp2.1\Core.pdb
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.csprojAssemblyReference.cache
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.csproj.CoreCompileInputs.cache
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.AssemblyInfoInputs.cache
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.AssemblyInfo.cs
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.csproj.CopyComplete
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.dll
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Boundaries.Persistence\obj\Debug\netcoreapp2.1\Boundaries.Persistence.pdb

@@ -17,6 +17,11 @@ F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.Razo
 F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.csproj.CopyComplete
 F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.dll
 F:\PROJECTS\APEC.RRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.pdb
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.csproj.CoreCompileInputs.cache
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.RazorAssemblyInfo.cache
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.RazorAssemblyInfo.cs
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.AssemblyInfoInputs.cache
+F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.AssemblyInfo.cs
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\bin\Debug\netcoreapp2.1\Web.Api.deps.json
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\bin\Debug\netcoreapp2.1\Web.Api.runtimeconfig.json
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\bin\Debug\netcoreapp2.1\Web.Api.runtimeconfig.dev.json
@@ -27,11 +32,6 @@ F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\bin\Debug\netcoreapp2.1\Core.dll
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\bin\Debug\netcoreapp2.1\Boundaries.Persistence.pdb
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\bin\Debug\netcoreapp2.1\Core.pdb
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.csprojAssemblyReference.cache
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.csproj.CoreCompileInputs.cache
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.RazorAssemblyInfo.cache
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.RazorAssemblyInfo.cs
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.AssemblyInfoInputs.cache
-F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.AssemblyInfo.cs
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.RazorTargetAssemblyInfo.cache
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.csproj.CopyComplete
 F:\PROJECTS\ApecRRHH\APEC.RRHH.api\Web.Api\obj\Debug\netcoreapp2.1\Web.Api.dll

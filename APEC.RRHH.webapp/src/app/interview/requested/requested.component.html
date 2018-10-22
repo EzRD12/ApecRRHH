@@ -1,6 +1,6 @@
-<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear entrevista" (nzOnCancel)="changeAspireToJobModalVisibility(false)"
+<nz-modal [nzVisible]="modalVisibility" nzTitle="Crear entrevista" (nzOnCancel)="changeModalVisibility(false)"
     [nzFooter]="modalFooter">
-    <form nz-form nzLayout="horizontal" [formGroup]="aspirateToJobForm">
+    <form nz-form nzLayout="horizontal" [formGroup]="createInterviewForm">
         <nz-form-item>
             <nz-form-label [nzSpan]="8" nzRequired>
                 Fecha de la entrevista
@@ -14,7 +14,7 @@
                 Entrevistador
             </nz-form-label>
             <nz-form-control [nzSpan]="10">
-                <nz-select nzAllowClear formControlName="interviewer" nzPlaceholder="Seleccione una opcion">
+                <nz-select nzAllowClear formControlName="employeeIdWhoInterviewed" nzPlaceholder="Seleccione una opcion">
                     <nz-option nzValue="0" nzLabel="Nadie"></nz-option>
                     <ng-container *ngFor="let employee of employees">
                         <nz-option [nzValue]="employee.id" [nzLabel]="employee.user.fullName"></nz-option>
@@ -29,7 +29,7 @@
     </ng-template>
 </nz-modal>
 
-<nz-card>
+<nz-card [nzLoading]="isDataLoading">
     <div class="header">
         <h4 class="title">Entrevistas solicitadas</h4>
     </div>
@@ -48,7 +48,7 @@
                     <td>{{data.salaryToAspire}}</td>
                     <td>{{data.job.name}}</td>
                     <td>
-                        <a>Aceptar</a>
+                        <a (click)="[changeModalVisibility(true), setAspiratorSelected(data)]">Aceptar</a>
                     </td>
                 </tr>
             </tbody>

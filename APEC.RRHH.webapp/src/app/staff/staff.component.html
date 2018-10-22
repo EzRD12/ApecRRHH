@@ -64,6 +64,8 @@
     </form>
 </nz-modal>
 <nz-card [nzLoading]="isDataLoading">
+    <button style="margin-bottom:1em;" (click)="giveMeReport()" nz-button nzSize="large"
+        nzType="primary">Reporte</button>
     <nz-table #basicTable [nzData]="displayData">
         <thead>
             <tr>

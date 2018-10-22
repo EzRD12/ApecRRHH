@@ -11,7 +11,7 @@ namespace Boundaries.Persistence.Configurations
             builder.HasKey(p => new { p.CandidateEmployeeId, p.JobId });
             builder.Property(p => p.SalaryToAspire)
                 .IsRequired();
-            builder.Property(job => job.UserIdWhoRecommendedIt).IsRequired(false);
+            builder.Property(job => job.UserId).IsRequired(false);
         }
     }
 }

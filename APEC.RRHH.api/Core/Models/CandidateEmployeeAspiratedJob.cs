@@ -13,7 +13,7 @@ namespace Core.Models
         public Job Job { get; set; }
         public FeatureStatus Status { get; set; }
         public int SalaryToAspire { get; set; }
-        public Guid? UserIdWhoRecommendedIt { get; set; }
+        public Guid? UserId { get; set; }
         public User UserWhoRecomendedIt { get; set; }
     }
 }

@@ -57,7 +57,6 @@ export class AccountService {
     }
 
     updateUser(user) {
-        return this.http.post<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/update`,
-            user).toPromise();
+        return this.http.put<BasicOperationResult<UserProfile>>(`${environment.apecRRHHApiUrl}/accounts/${user.id}`, user).toPromise();
     }
 }

@@ -4,14 +4,16 @@ using Boundaries.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Boundaries.Persistence.Migrations
 {
     [DbContext(typeof(ApecRrhhContext))]
-    partial class ApecRrhhContextModelSnapshot : ModelSnapshot
+    [Migration("20181020205007_addedInterviewTable")]
+    partial class addedInterviewTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +77,7 @@ namespace Boundaries.Persistence.Migrations
 
                     b.Property<Guid>("EmployeeId");
 
-                    b.Property<string>("EmployeeNote")
+                    b.Property<string>("EmployeeNotes")
                         .HasColumnType("varchar(400)");
 
                     b.Property<bool>("Hired");
